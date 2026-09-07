@@ -1,0 +1,60 @@
+---
+import ToolKnowledgePage from '../../engine/components/ToolKnowledgePage.astro';
+import MoneyInput from '../../engine/components/MoneyInput.astro';
+import PercentageInput from '../../engine/components/PercentageInput.astro';
+import DaysInput from '../../engine/components/DaysInput.astro';
+import Result from '../../engine/components/Result.astro';
+import { validateProjectDefinition } from '../../engine/validation';
+import { dailySalesTargetProject, dailySalesTargetSources, dailySalesTargetTool } from '../../projects/sajang/tools/daily-sales-target/definition';
+import { calculateDailySalesTarget, formatPercent, formatWon } from '../../projects/sajang/tools/daily-sales-target/calculator';
+import '../../engine/styles/foundation.css';
+import '../../projects/sajang/styles/daily-sales-target.css';
+
+validateProjectDefinition(dailySalesTargetProject, (id) => id === 'daily-sales-target' ? () => calculateDailySalesTarget : undefined);
+const exampleInput = { fixedCost: 4_000_000, variableRate: 0.35, operatingDays: 26, targetProfit: 3_000_000 };
+const exampleResult = calculateDailySalesTarget(exampleInput);
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{dailySalesTargetTool.search.title}</title>
+    <meta name="description" content={dailySalesTargetTool.search.description} />
+  </head>
+  <body>
+    <main class="engine-container engine-calculator">
+      <ToolKnowledgePage tool={dailySalesTargetTool} projectName="사장도구" categoryName="매출" sources={dailySalesTargetSources}>
+        <section slot="calculator" aria-labelledby="calculator-inputs" class="engine-calculator daily-sales-layout">
+          <section class="daily-sales-input-panel">
+            <h2 id="calculator-inputs" class="engine-h2">계산 조건</h2>
+            <form data-daily-sales-target-form>
+              <MoneyInput id="fixedCost" label="월 고정비" description="판매량 변화와 직접 비례하지 않는 비용입니다." required min={0} defaultValue={exampleInput.fixedCost} />
+              <PercentageInput id="variableRate" label="평균 변동비율" description="매출에서 재료비·수수료처럼 변동하는 비율입니다." required defaultValue={35} />
+              <DaysInput id="operatingDays" label="월 영업일" required max={31} defaultValue={exampleInput.operatingDays} />
+              <MoneyInput id="targetProfit" label="월 목표수익" description="고정비를 충당한 뒤 추가로 목표하는 금액입니다." required min={0} defaultValue={exampleInput.targetProfit} />
+              <MoneyInput id="averageOrderValue" label="평균 객단가" description="선택 입력. 필요 고객 수를 계산합니다." min={0} />
+              <button class="engine-button" type="submit">계산하기</button>
+              <p data-calculator-error class="engine-input-error" role="alert" hidden></p>
+            </form>
+          </section>
+          <section aria-labelledby="calculator-result" class="daily-sales-result-panel">
+            <h2 id="calculator-result" class="engine-h2">계산 결과</h2>
+            <Result variant="primary" label="하루 평균 목표 매출" value={formatWon(exampleResult.targetDaily).replace(/원$/, '')} unit="원" id="target-daily-result" />
+            <p class="daily-sales-meaning">입력한 조건에서 월 목표수익을 달성하기 위한 하루 평균 목표 매출입니다.</p>
+            <dl class="daily-sales-results">
+              <div><dt>목표 월매출</dt><dd data-result="targetMonthly" class="engine-numeric">{formatWon(exampleResult.targetMonthly)}</dd></div>
+              <div><dt>손익분기 월매출</dt><dd data-result="breakEvenMonthly" class="engine-numeric">{formatWon(exampleResult.breakEvenMonthly)}</dd></div>
+              <div><dt>손익분기 일매출</dt><dd data-result="breakEvenDaily" class="engine-numeric">{formatWon(exampleResult.breakEvenDaily)}</dd></div>
+              <div><dt>공헌이익률</dt><dd data-result="contributionRate" class="engine-numeric">{formatPercent(exampleResult.contributionRate)}</dd></div>
+              <div><dt>필요 고객/주문 수</dt><dd data-result="customersNeeded" class="engine-numeric">객단가 입력 시 계산</dd></div>
+            </dl>
+          </section>
+        </section>
+      </ToolKnowledgePage>
+    </main>
+  </body>
+</html>
+
+<script src="../../projects/sajang/tools/daily-sales-target/client.ts"></script>

@@ -14,7 +14,7 @@ const sourceById = new Map(sources.map((source) => [source.id, source]));
 const formatValue = (value: number | string | boolean) => typeof value === 'number' ? value.toLocaleString() : String(value);
 ---
 
-<article class="engine-reading engine-knowledge-page">
+<article class="engine-knowledge-page">
   <nav aria-label="Breadcrumb" class="engine-small">
     <a href="/">{projectName}</a>
     <span aria-hidden="true"> / </span>
@@ -34,6 +34,10 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
     <p>{tool.knowledge.shortAnswer}</p>
   </section>
 
+  <slot name="calculator" />
+
+  <div class="engine-reading engine-knowledge-prose">
+
   <section aria-labelledby="definition" class="engine-section">
     <h2 id="definition" class="engine-h2">정의와 작동 방식</h2>
     <h3 class="engine-h3">정의</h3>
@@ -44,7 +48,7 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
 
   <section aria-labelledby="formula" class="engine-section">
     <h2 id="formula" class="engine-h2">공식</h2>
-    <pre><code>{tool.knowledge.formula}</code></pre>
+    <pre class="engine-formula"><code>{tool.knowledge.formula}</code></pre>
   </section>
 
   <section aria-labelledby="example" class="engine-section">
@@ -81,11 +85,12 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
     ))}
   </section>
 
-  {relatedTools.length > 0 && (
+  {(relatedTools.length > 0 || (tool.relations.relatedDecisions?.length ?? 0) > 0) && (
     <section aria-labelledby="related-tools" class="engine-section">
       <h2 id="related-tools" class="engine-h2">관련 도구</h2>
       <ul>
         {relatedTools.map((related) => <li><a href={`/tools/${related.identity.slug}/`}>{related.search.name}</a></li>)}
+        {tool.relations.relatedDecisions?.map((related) => <li>{related.question} — {related.label}</li>)}
       </ul>
     </section>
   )}
@@ -100,4 +105,5 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
     </ul>
     <p>마지막 검토일: <time datetime={tool.maintenance.reviewedAt}>{tool.maintenance.reviewedAt}</time></p>
   </footer>
+  </div>
 </article>

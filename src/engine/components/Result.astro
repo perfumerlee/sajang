@@ -6,16 +6,19 @@ interface Props {
   value?: number | string;
   description?: string;
   id?: string;
+  unit?: string;
 }
 
-const { variant, label, value, description, id } = Astro.props;
-const safeValue = typeof value === 'number' ? (Number.isFinite(value) ? value.toLocaleString() : '—') : (value?.trim() || '—');
+const { variant, label, value, description, id, unit } = Astro.props;
+const safeValue = typeof value === 'number'
+  ? (Number.isFinite(value) ? value.toLocaleString() : '—')
+  : (value && !/^(?:NaN|[-+]?Infinity|∞)$/i.test(value.trim()) ? value.trim() : '—');
 const className = variant === 'primary' ? 'engine-primary-result' : `engine-result engine-result-${variant}`;
 const live = variant === 'primary' || variant === 'error' ? 'polite' : undefined;
 ---
 
 <section id={id} class={className} aria-live={live}>
   <h3 class="engine-h3">{label}</h3>
-  {variant !== 'interpretation' && <p class="engine-primary-number engine-numeric">{safeValue}</p>}
+  {variant !== 'interpretation' && <p data-result-value class="engine-primary-number engine-numeric"><span data-result-number>{safeValue}</span>{unit && <span data-result-unit>{unit}</span>}</p>}
   {description && <p>{description}</p>}
 </section>

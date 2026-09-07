@@ -149,6 +149,7 @@ export interface ToolDefinition {
   };
   relations: {
     relatedTools: RelatedToolDefinition[];
+    relatedDecisions?: Array<{ toolId: string; question: string; label: string }>;
     sources: string[];
   };
   maintenance: {

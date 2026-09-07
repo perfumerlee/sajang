@@ -16,11 +16,11 @@ interface Props {
 
 const { id, label, kind, description, unit, required = false, defaultValue, min, max, step = 'any', error } = Astro.props;
 const descriptionId = description ? `${id}-description` : undefined;
-const errorId = error ? `${id}-error` : undefined;
-const describedBy = [descriptionId, errorId].filter(Boolean).join(' ') || undefined;
+const errorId = `${id}-error`;
+const describedBy = [descriptionId, error ? errorId : undefined].filter(Boolean).join(' ') || undefined;
 ---
 
-<div class="engine-input-field">
+<div class="engine-input-field" data-input-field={id}>
   <label for={id}>{label}{required && <span aria-hidden="true"> *</span>}</label>
   {description && <p id={descriptionId} class="engine-small">{description}</p>}
   <div class="engine-input-control">
@@ -34,10 +34,12 @@ const describedBy = [descriptionId, errorId].filter(Boolean).join(' ') || undefi
       max={max}
       step={step}
       required={required}
-      aria-invalid={error ? 'true' : undefined}
+      aria-invalid={error ? 'true' : 'false'}
       aria-describedby={describedBy}
+      data-description-id={descriptionId}
+      data-error-id={errorId}
     />
     {unit && <span aria-hidden="true">{unit}</span>}
   </div>
-  {error && <p id={errorId} role="alert" class="engine-input-error">{error}</p>}
+  <p id={errorId} data-input-error role="alert" class="engine-input-error" hidden>{error}</p>
 </div>

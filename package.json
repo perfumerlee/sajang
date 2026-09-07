@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "dev:clean": "node scripts/clean-dev-cache.mjs && astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "astro check",
@@ -16,6 +17,7 @@
     "typescript": "latest"
   },
   "devDependencies": {
+    "@types/node": "^26.5.0",
     "vitest": "latest"
   }
 }

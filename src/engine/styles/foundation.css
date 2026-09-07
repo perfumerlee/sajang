@@ -70,6 +70,10 @@ textarea {
   width: min(100%, var(--content-reading));
 }
 
+.engine-knowledge-page {
+  width: min(100%, var(--content-site));
+}
+
 .engine-calculator {
   width: min(100%, var(--content-calculator));
 }
@@ -94,6 +98,20 @@ textarea {
   font-size: clamp(2.25rem, 5vw, 3.5rem);
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.engine-primary-number [data-result-unit] {
+  font-size: 0.65em;
+  margin-inline-start: 0.12em;
+}
+
+.engine-formula {
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .engine-rule {

@@ -2,8 +2,8 @@
 
 -   Project: Tool Site Engine + Sajang / 사장도구
 -   State format version: 0.02
--   Current Phase: PHASE 8 --- Price Change Tool
--   Status: PHASE 8 COMPLETE
+-   Current Phase: PHASE 9 --- Discount Profit Tool
+-   Status: PHASE 9 COMPLETE
 -   Last verified: 2026-09-08
 
 ## Current Objective
@@ -35,10 +35,11 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 6 SEO, metadata, schema, sitemap, and robots.txt completed.
 -   PHASE 7 `selling-price` Tool completed.
 -   PHASE 8 `price-change` Tool completed.
+-   PHASE 9 `discount-profit` Tool completed.
 
 ## In Progress
 
--   PHASE 8 is complete. Price Change calculation, static content, SEO, sitemap, and safety verification passed.
+-   PHASE 9 is complete. Discount Profit calculation, static content, SEO, sitemap, and safety verification passed.
 
 ## Not Started
 
@@ -51,6 +52,7 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 6 SEO/schema/sitemap completed
 -   PHASE 7 selling-price completed
 -   PHASE 8 price-change completed
+-   PHASE 9 discount-profit completed
 -   PHASE 9 discount-profit
 -   PHASE 10 hiring-profit
 -   PHASE 11 site pages
@@ -84,18 +86,18 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Current Known Issues
 
--   No known PHASE 8 blockers remain.
+-   No known PHASE 9 blockers remain.
 
 ## Next Task
 
-PHASE 9 pending. Begin only after a separate request.
+PHASE 10 pending. Begin only after a separate request.
 
 Recommended execution: lightweight implementation model.
 
 ## Verification
 
 ``` text
-tests: PASS (`npm.cmd test`, 32 tests; PHASE 5/7 regressions, Price Change
+tests: PASS (`npm.cmd test`, 38 tests; PHASE 5/7/8 regressions, Discount Profit
 vectors, validation boundaries, overflow, static contract, parity, runtime safety,
 Engine leakage, and SEO contract checks included)
 typecheck: PASS (`ASTRO_TELEMETRY_DISABLED=1 npm run typecheck`)
@@ -106,6 +108,7 @@ SEO metadata/schema/sitemap: PASS (production HTML and static endpoints verified
 PHASE 7 calculation/static contract: PASS
 PHASE 8 calculation/static contract: PASS
 Price Change production HTML and sitemap inclusion: PASS
+Discount Profit production HTML and sitemap inclusion: PASS
 ```
 
 ## Handoff Note

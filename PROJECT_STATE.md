@@ -2,7 +2,7 @@
 
 -   Project: Tool Site Engine + Sajang / 사장도구
 -   State format version: 0.02
--   Current Phase: PHASE 0 --- Repository Bootstrap + Specification Lock
+-   Current Phase: PHASE 1 --- Core Types / Project Contract
 -   Status: COMPLETE
 -   Last verified: 2026-09-08
 
@@ -27,14 +27,16 @@ support the approved Tool Site Engine and Sajang specifications.
 -   Codex implementation plan v0.02 completed.
 -   Model workflow / continuity specification v0.01 completed.
 -   Persistent Codex operating rules established.
+-   PHASE 1 core contracts and definition validation completed.
 
 ## In Progress
 
--   None. PHASE 0 foundation is complete.
+-   None. PHASE 1 is complete; PHASE 2 has not started.
 
 ## Not Started
 
 -   PHASE 0 repository bootstrap completed
+-   PHASE 1 core contracts completed
 -   PHASE 1 core contracts
 -   PHASE 2 design foundation
 -   PHASE 3 static page engine
@@ -80,14 +82,14 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Next Task
 
-Review PHASE 0 results, then begin PHASE 1 only by separate request.
+Begin PHASE 2 only by separate request.
 
 Recommended execution: lightweight implementation model.
 
 ## Verification
 
 ``` text
-test: PASS (`npm test`, 1 test passed)
+test: PASS (`npm test`, 6 tests passed)
 typecheck: PASS (`ASTRO_TELEMETRY_DISABLED=1 npm run typecheck`)
 build: PASS (`ASTRO_TELEMETRY_DISABLED=1 npm run build`, static output)
 ```

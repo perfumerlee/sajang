@@ -1,5 +1,7 @@
 ---
 import type { SourceDefinition, ToolDefinition } from '../contracts';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
 
 interface Props {
   tool: ToolDefinition;
@@ -14,6 +16,7 @@ const sourceById = new Map(sources.map((source) => [source.id, source]));
 const formatValue = (value: number | string | boolean) => typeof value === 'number' ? value.toLocaleString() : String(value);
 ---
 
+<SiteHeader brand={projectName} />
 <article class="engine-knowledge-page">
   <nav aria-label="Breadcrumb" class="engine-small">
     <a href="/">{projectName}</a>
@@ -107,3 +110,4 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
   </footer>
   </div>
 </article>
+<SiteFooter brand={projectName} />

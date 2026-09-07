@@ -1,0 +1,24 @@
+.site-header { border-bottom: 1px solid var(--color-rule); }
+.site-header-inner { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.site-brand { color: var(--color-ink); font-weight: 700; text-decoration: none; }
+.site-header nav, .site-footer nav { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.site-header a, .site-footer a { color: var(--color-ink); text-decoration: none; padding-block: var(--space-2); }
+.site-header a:hover, .site-footer a:hover { color: var(--color-ledger-accent); }
+.site-current { font-weight: 700; border-bottom: 2px solid var(--color-ink); }
+.site-main { padding-block: var(--space-7) var(--space-9); }
+.site-reading { width: min(calc(100% - 2 * var(--space-5)), 1040px); margin-inline: auto; }
+.site-intro { padding-block: var(--space-5) var(--space-7); }
+.site-intro h1 { max-width: 18ch; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.15; margin-block: var(--space-3) var(--space-4); }
+.site-intro p { max-width: 48rem; }
+.site-tool-index { margin-block: var(--space-5); }
+.site-tool-row { display: grid; grid-template-columns: 6rem minmax(0, 1fr); gap: var(--space-5); padding-block: var(--space-4); border-top: 1px solid var(--color-rule); color: var(--color-ink); text-decoration: none; }
+.site-tool-row:last-child { border-bottom: 1px solid var(--color-rule); }
+.site-tool-row:hover { background: var(--color-paper-muted); }
+.site-tool-number { color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.site-tool-question { display: block; font-size: 1.25rem; font-weight: 700; }
+.site-tool-name { display: block; margin-block-start: var(--space-1); }
+.site-section { padding-block: var(--space-6); border-top: 1px solid var(--color-rule); }
+.site-footer { border-top: 1px solid var(--color-rule); padding-block: var(--space-5); color: var(--color-muted); }
+.site-footer-inner { display: flex; justify-content: space-between; gap: var(--space-5); align-items: start; }
+.site-footer p { margin: 0; }
+@media (max-width: 767px) { .site-main { padding-block: var(--space-5) var(--space-7); } .site-reading { width: min(100% - 2 * var(--space-3), var(--content-reading)); } .site-tool-row { grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--space-3); min-height: 72px; } .site-footer-inner { display: block; } .site-footer nav { margin-block-start: var(--space-3); gap: var(--space-3); } }

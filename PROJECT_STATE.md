@@ -2,8 +2,8 @@
 
 -   Project: Tool Site Engine + Sajang / 사장도구
 -   State format version: 0.02
--   Current Phase: PHASE 10 --- Hiring Profit Tool
--   Status: PHASE 10 COMPLETE
+-   Current Phase: PHASE 11 --- Homepage / About / Privacy / Contact
+-   Status: PHASE 11 Visual Remediation complete; viewport recheck pending
 -   Last verified: 2026-09-08
 
 ## Current Objective
@@ -37,10 +37,11 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 8 `price-change` Tool completed.
 -   PHASE 9 `discount-profit` Tool completed.
 -   PHASE 10 `hiring-profit` Tool completed.
+-   PHASE 11 site pages, shared shell, truthful privacy/contact documents, and homepage Tool index completed.
 
 ## In Progress
 
--   PHASE 10 is complete. Hiring Profit calculation, static content, SEO, sitemap, and safety verification passed.
+-   PHASE 11 site pages and requested Homepage visual remediation are complete. Viewport recheck remains pending.
 
 ## Not Started
 
@@ -56,8 +57,8 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 9 discount-profit completed
 -   PHASE 9 discount-profit
 -   PHASE 10 hiring-profit completed
--   PHASE 11 site pages
--   PHASE 12 related decisions
+-   PHASE 11 site pages completed
+-   PHASE 12 related decisions (waiting)
 -   PHASE 13 storage/analytics/ad infrastructure
 -   PHASE 14 cross-project fixture
 -   PHASE 15 final QA
@@ -87,18 +88,18 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Current Known Issues
 
--   No known PHASE 10 blockers remain.
+-   No known PHASE 11 code blockers remain; post-remediation viewport recheck is pending.
 
 ## Next Task
 
-PHASE 11 pending. Begin only after a separate request.
+PHASE 12 pending. Begin only after a separate request. Recheck Homepage at 1440×900 and 375×812 before closing the visual remediation review.
 
 Recommended execution: lightweight implementation model.
 
 ## Verification
 
 ``` text
-tests: PASS (`npm.cmd test`, 45 tests; PHASE 5/7/8/9 regressions, Hiring Profit
+tests: PASS (`npm.cmd test`, 48 tests; PHASE 5/7/8/9 regressions, Hiring Profit
 vectors, validation boundaries, overflow, static contract, parity, runtime safety,
 Engine leakage, and SEO contract checks included)
 typecheck: PASS (`ASTRO_TELEMETRY_DISABLED=1 npm run typecheck`)
@@ -111,6 +112,9 @@ PHASE 8 calculation/static contract: PASS
 Price Change production HTML and sitemap inclusion: PASS
 Discount Profit production HTML and sitemap inclusion: PASS
 Hiring Profit production HTML and sitemap inclusion: PASS
+PHASE 11 site route, homepage content, navigation, privacy truthfulness, and sitemap tests: PASS
+PHASE 11 default static build routes and metadata inspection: PASS
+PHASE 11 BASE_PATH=/sajang build and link/canonical/sitemap inspection: PASS
 ```
 
 ## Handoff Note

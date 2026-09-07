@@ -1,0 +1,8 @@
+---
+import { toCanonicalUrl } from '../seo';
+interface Props { title: string; description: string; path: string; brand: string; siteUrl?: string; basePath?: string; }
+const { title, description, path, brand, siteUrl, basePath = '/' } = Astro.props;
+const canonical = toCanonicalUrl({ tool: { search: { title, description } } as never, projectName: brand, categoryName: '', siteUrl, basePath }, path);
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': [{ '@type': 'WebSite', name: brand, url: toCanonicalUrl({ tool: {} as never, projectName: brand, categoryName: '', siteUrl, basePath }, '/') }, { '@type': 'WebPage', name: title, description, url: canonical } ] }).replace(/</g, '\\u003c');
+---
+<link rel="canonical" href={canonical} /><meta name="robots" content="index,follow" /><meta property="og:type" content="website" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonical} /><meta property="og:site_name" content={brand} /><meta property="og:locale" content="ko_KR" /><script type="application/ld+json" is:inline set:html={jsonLd}></script>

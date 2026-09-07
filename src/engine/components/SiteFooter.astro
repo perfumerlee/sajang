@@ -1,0 +1,6 @@
+---
+interface Props { brand: string; }
+const { brand } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+<footer class="site-footer"><div class="engine-container site-footer-inner"><p>{brand}는 장사하면서 마주치는 숫자를 입력 조건 기준으로 계산해보는 무료 도구입니다.</p><nav aria-label="보조 링크"><a href={`${base}about/`}>소개</a><a href={`${base}privacy/`}>개인정보처리방침</a><a href={`${base}contact/`}>문의</a></nav></div></footer>

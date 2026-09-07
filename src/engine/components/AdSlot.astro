@@ -1,0 +1,6 @@
+---
+type Slot = 'after-result' | 'after-explanation' | 'content-end';
+interface Props { enabled: boolean; slot: Slot; }
+const { enabled, slot } = Astro.props;
+---
+{enabled ? <aside class="engine-ad-slot" data-ad-slot={slot} aria-label="광고 영역"></aside> : null}

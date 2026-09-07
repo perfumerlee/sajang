@@ -2,8 +2,8 @@
 
 -   Project: Tool Site Engine + Sajang / 사장도구
 -   State format version: 0.02
--   Current Phase: PHASE 12 --- Related Decision Navigation
--   Status: PHASE 12 COMPLETE
+-   Current Phase: PHASE 13 --- Storage / Analytics / AdSlot Infrastructure
+-   Status: PHASE 13 COMPLETE
 -   Last verified: 2026-09-08
 
 ## Current Objective
@@ -39,10 +39,11 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 10 `hiring-profit` Tool completed.
 -   PHASE 11 site pages, shared shell, truthful privacy/contact documents, and homepage Tool index completed.
 -   PHASE 12 Related Decision Navigation completed with static, BASE_PATH-aware links.
+-   PHASE 13 generic Storage, Analytics, and AdSlot infrastructure completed; all activation remains OFF.
 
 ## In Progress
 
--   PHASE 12 is complete. Related decision graph, static HTML links, published filtering, and BASE_PATH verification passed.
+-   PHASE 13 is complete. Safe infrastructure contracts and disabled activation boundaries passed verification.
 
 ## Not Started
 
@@ -60,7 +61,7 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 10 hiring-profit completed
 -   PHASE 11 site pages completed
 -   PHASE 12 related decisions completed
--   PHASE 13 storage/analytics/ad infrastructure
+-   PHASE 13 storage/analytics/ad infrastructure completed
 -   PHASE 14 cross-project fixture
 -   PHASE 15 final QA
 -   PHASE 16 production/GitHub Pages
@@ -89,11 +90,11 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Current Known Issues
 
--   No known PHASE 12 code blockers remain. Exact visual viewport review remains a separate QA concern.
+-   No known PHASE 13 code blockers remain. Storage, analytics, ads, and remote user-data activation remain disabled.
 
 ## Next Task
 
-PHASE 13 pending. Begin only after a separate request.
+PHASE 14 pending. Begin only after a separate request.
 
 Recommended execution: lightweight implementation model.
 
@@ -119,6 +120,10 @@ PHASE 11 BASE_PATH=/sajang build and link/canonical/sitemap inspection: PASS
 PHASE 12 relation graph and static link tests: PASS (50 tests)
 PHASE 12 production HTML related sections and destination links: PASS
 PHASE 12 BASE_PATH=/sajang related-link inspection: PASS
+PHASE 13 infrastructure tests: PASS (54 tests)
+PHASE 13 activation safety: PASS (analytics OFF, ads OFF, auto-save OFF, remote user storage NONE)
+PHASE 13 provider/source/build inspection: PASS (no provider scripts or identifiers)
+PHASE 13 BASE_PATH=/sajang regression and Privacy consistency: PASS
 ```
 
 ## Handoff Note

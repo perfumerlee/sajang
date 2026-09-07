@@ -1,0 +1,12 @@
+---
+interface Props {
+  primary?: boolean;
+  class?: string;
+}
+
+const { primary = false, class: className = '' } = Astro.props;
+---
+
+<div class={`${primary ? 'engine-primary-result' : 'engine-rule'} ${className}`.trim()} role="separator">
+  <slot />
+</div>

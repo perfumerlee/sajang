@@ -2,7 +2,7 @@
 
 -   Project: Tool Site Engine + Sajang / 사장도구
 -   State format version: 0.02
--   Current Phase: PHASE 1 --- Core Types / Project Contract
+-   Current Phase: PHASE 2 --- Design Foundation / Working Ledger Tokens
 -   Status: COMPLETE
 -   Last verified: 2026-09-08
 
@@ -28,17 +28,17 @@ support the approved Tool Site Engine and Sajang specifications.
 -   Model workflow / continuity specification v0.01 completed.
 -   Persistent Codex operating rules established.
 -   PHASE 1 core contracts and definition validation completed.
+-   PHASE 2 design foundation and Working Ledger tokens completed.
 
 ## In Progress
 
--   None. PHASE 1 is complete; PHASE 2 has not started.
+-   None. PHASE 2 is complete; PHASE 3 has not started.
 
 ## Not Started
 
 -   PHASE 0 repository bootstrap completed
 -   PHASE 1 core contracts completed
--   PHASE 1 core contracts
--   PHASE 2 design foundation
+-   PHASE 2 design foundation completed
 -   PHASE 3 static page engine
 -   PHASE 4 calculator runtime
 -   PHASE 5 daily-sales-target reference Tool
@@ -82,7 +82,7 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Next Task
 
-Begin PHASE 2 only by separate request.
+Begin PHASE 3 only by separate request.
 
 Recommended execution: lightweight implementation model.
 

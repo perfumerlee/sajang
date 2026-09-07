@@ -1,0 +1,12 @@
+---
+interface Props {
+  width?: 'site' | 'reading' | 'calculator';
+  class?: string;
+}
+
+const { width = 'site', class: className = '' } = Astro.props;
+---
+
+<div class={`engine-container engine-${width} ${className}`.trim()}>
+  <slot />
+</div>

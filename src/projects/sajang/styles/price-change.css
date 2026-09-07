@@ -1,0 +1,9 @@
+.price-change-layout { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); gap: var(--space-8); margin-block-start: calc(var(--space-6) - var(--space-2)); }
+.price-change-input-panel, .price-change-result-panel { min-width: 0; }
+.price-change-result-panel { border-inline-start: 1px solid var(--color-rule); padding-inline-start: var(--space-6); }
+.price-change-results { margin: 0; }
+.price-change-results div { display: flex; justify-content: space-between; gap: var(--space-4); border-top: 1px solid var(--color-rule); padding-block: var(--space-3); }
+.price-change-results dt, .price-change-results dd { margin: 0; }
+.price-change-results dd { text-align: end; overflow-wrap: anywhere; }
+.price-change-meaning { color: var(--color-muted); }
+@media (max-width: 899px) { .price-change-layout { display: block; } .price-change-result-panel { border-inline-start: 0; border-top: 1px solid var(--color-rule); margin-block-start: var(--space-7); padding-inline-start: 0; padding-block-start: var(--space-6); } }

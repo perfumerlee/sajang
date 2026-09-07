@@ -17,7 +17,7 @@ export const dailySalesTargetTool: ToolDefinition = {
     description: '월 고정비, 변동비율, 영업일과 목표수익을 입력하면 손익분기 월매출과 하루 목표 매출을 계산한다.',
   },
   knowledge: {
-    shortAnswer: `입력한 조건 기준 하루 목표 매출은 ${formatWon(exampleResult.targetDaily)}입니다.`,
+    shortAnswer: `예를 들어 월 고정비 4,000,000원, 평균 변동비율 35%, 월 목표수익 3,000,000원, 월 영업일 26일이라면 하루 목표 매출은 약 ${formatWon(exampleResult.targetDaily)}입니다. 실제 결과는 계산기에 입력한 조건에 따라 달라집니다.`,
     definition: '하루 목표 매출은 월 고정비와 월 목표수익을 공헌이익률로 나눈 뒤 월 영업일로 나눈 예상 기준입니다.',
     howItWorks: '변동비율을 제외한 공헌이익률을 구하고, 손익분기 매출과 목표수익을 포함한 목표 매출을 각각 계산합니다.',
     formula: '공헌이익률 = 1 - 평균 변동비율\n손익분기 월매출 = 월 고정비 / 공헌이익률\n손익분기 일매출 = 손익분기 월매출 / 월 영업일\n목표 월매출 = (월 고정비 + 월 목표수익) / 공헌이익률\n하루 목표 매출 = 목표 월매출 / 월 영업일\n필요 고객 수 = 하루 목표 매출 / 평균 객단가',

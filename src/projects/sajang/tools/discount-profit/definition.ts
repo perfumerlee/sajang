@@ -7,7 +7,7 @@ export const discountProfitTool: ToolDefinition = {
   identity: { id: 'discount-profit', slug: 'discount-profit', category: 'pricing', status: 'published', version: '0.1.0' },
   search: { question: '할인해도 될까?', name: '할인 손익 계산기', title: '할인 손익 계산기 - 할인해도 될까? | 사장도구', description: '할인 후 개당 기여금과 현재 총 기여금을 유지하는 데 필요한 판매량 증가율을 계산합니다.' },
   knowledge: {
-    shortAnswer: `10% 할인하면 현재 총 기여금을 유지하기 위해 판매량이 약 ${formatPercent(exampleResult.requiredIncreaseRate)} 증가해야 합니다.`,
+    shortAnswer: `예를 들어 10% 할인하는 조건에서는 현재 총 기여금을 유지하기 위해 판매량이 약 ${formatPercent(exampleResult.requiredIncreaseRate)} 증가해야 합니다. 실제 결과는 계산기에 입력한 조건에 따라 달라집니다.`,
     definition: '할인 손익 계산기는 할인 전후의 개당 기여금을 비교하고, 할인으로 줄어든 개당 기여금을 보전하기 위해 필요한 판매량을 계산합니다.',
     howItWorks: '정상 판매가격에서 수수료와 비용을 뺀 현재 개당 기여금과 현재 총 기여금을 계산합니다. 할인 판매가격의 개당 기여금으로 현재 총 기여금을 나누어 필요한 판매량과 증가 필요율을 구합니다. 현재 판매량은 할인 전 기준이며 같은 비교 기간의 값입니다.',
     formula: '할인 판매가격 = 정상 판매가격 × (1 - 할인율)\n할인 전 개당 기여금 = 정상 판매가격 - 단위 비용 - 고정 판매비 - 정상 판매가격 × 판매 수수료율\n할인 전 총 기여금 = 할인 전 개당 기여금 × 현재 판매량\n할인 후 개당 기여금 = 할인 판매가격 - 단위 비용 - 고정 판매비 - 할인 판매가격 × 판매 수수료율\n필요 판매량 = 할인 전 총 기여금 / 할인 후 개당 기여금\n판매량 증가 필요율 = 필요 판매량 / 현재 판매량 - 1',

@@ -2,8 +2,8 @@
 
 -   Project: Tool Site Engine + Sajang / 사장도구
 -   State format version: 0.02
--   Current Phase: PHASE 15 --- Production QA
--   Status: PHASE 15 COMPLETE; Release Candidate QA: PASS; Manual viewport QA: PASS
+-   Current Phase: PHASE 16 --- Production Release Gate
+-   Status: PHASE 16 COMPLETE; Production Release Gate: PASS WITH REMEDIATION; Sajang v0.01: RELEASE READY
 -   Last verified: 2026-09-08
 
 ## Current Objective
@@ -42,10 +42,11 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 13 generic Storage, Analytics, and AdSlot infrastructure completed; all activation remains OFF.
 -   PHASE 14 independent Unit Fixture architecture gate completed with STRONG PASS.
 -   PHASE 15 production code/static/accessibility/safety QA and manual viewport review completed.
+-   PHASE 16 production release audit completed; static worked-example Quick Answer semantics clarified.
 
 ## In Progress
 
--   PHASE 15 is complete. Production routes, calculators, static HTML, metadata, links, BASE_PATH, safety checks, and manual viewport QA passed.
+-   PHASE 16 is complete. Production routes, calculators, static HTML, metadata, links, BASE_PATH, workflow, privacy, safety, and architecture release checks passed.
 
 ## Not Started
 
@@ -66,7 +67,7 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 13 storage/analytics/ad infrastructure completed
 -   PHASE 14 cross-project architecture fixture completed
 -   PHASE 15 final QA completed; PHASE 16 waiting
--   PHASE 16 production/GitHub Pages
+-   PHASE 16 production/GitHub Pages release gate completed
 
 ## Locked Decisions
 - internal project/repository ID: `sajang`
@@ -92,11 +93,11 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Current Known Issues
 
--   No known PHASE 15 blockers remain. Daily Sales Target Quick Answer semantics should be reviewed in the PHASE 16 final audit; storage, analytics, ads, and remote user-data activation remain disabled.
+-   No release blockers remain. Storage, analytics, ads, and remote user-data activation remain disabled.
 
 ## Next Task
 
-PHASE 16 pending. Begin only after a separate request.
+Production release gate completed. User may commit/push and allow the existing GitHub Pages workflow to deploy.
 
 Recommended execution: lightweight implementation model.
 
@@ -132,7 +133,7 @@ PHASE 14 production isolation and BASE_PATH regression: PASS
 PHASE 15 calculation, validation/state, static HTML, SEO, internal link, infrastructure, and architecture regression QA: PASS (58 tests)
 PHASE 15 normal and BASE_PATH=/sajang builds: PASS
 PHASE 15 manual viewport QA: PASS (375×812, 1440×900; overflow, composition, wrapping, numeric layout, and Working Ledger integrity reviewed)
-PHASE 16 carry-forward: verify whether the Daily Sales Target Quick Answer fixed value is clearly identified as an example rather than an interactive result.
+PHASE 16 release audit: PASS WITH REMEDIATION; Quick Answer example semantics clarified; 59 tests, root and BASE_PATH builds, workflow, SEO, sitemap, robots, privacy, and architecture checks passed.
 ```
 
 ## Handoff Note

@@ -9,7 +9,7 @@ export const priceChangeTool: ToolDefinition = {
   identity: { id: 'price-change', slug: 'price-change', category: 'pricing', status: 'published', version: '0.1.0' },
   search: { question: '가격 올려도 될까?', name: '가격 변경 계산기', title: '가격 변경 계산기 - 가격 올려도 될까? | 사장도구', description: '현재 판매가격과 변경 판매가격을 비교해 현재 총 기여금을 유지하는 데 필요한 판매량과 예상 기여금 변화를 계산합니다.' },
   knowledge: {
-    shortAnswer: `판매가격을 20,000원에서 23,000원으로 바꾸면 현재 총 기여금을 유지하는 데 필요한 판매량은 ${formatQuantity(exampleResult.requiredQuantity)}입니다.`,
+    shortAnswer: `예를 들어 판매가격을 20,000원에서 23,000원으로 바꾸는 조건에서는 현재 총 기여금을 유지하는 데 필요한 판매량이 ${formatQuantity(exampleResult.requiredQuantity)}입니다. 실제 결과는 계산기에 입력한 조건에 따라 달라집니다.`,
     definition: '가격 변경 계산기는 현재 판매가격과 변경 판매가격에서 개당 기여금이 어떻게 달라지는지 비교하고, 현재 총 기여금을 유지하기 위한 판매량 변화를 계산합니다.',
     howItWorks: '현재와 변경 판매가격에서 수수료와 비용을 뺀 개당 기여금을 계산한 뒤, 현재 총 기여금을 변경 후 개당 기여금으로 나눕니다. 예상 판매량을 입력하면 입력 조건 기준 예상 총 기여금도 비교합니다. 현재 판매량과 예상 판매량은 같은 비교 기간의 값이어야 합니다.',
     formula: '현재 개당 기여금 = 현재 판매가격 - 단위 비용 - 고정 판매비 - 현재 판매가격 × 판매 수수료율\n현재 총 기여금 = 현재 개당 기여금 × 현재 판매량\n변경 후 개당 기여금 = 변경 판매가격 - 단위 비용 - 고정 판매비 - 변경 판매가격 × 판매 수수료율\n필요 판매량 = 현재 총 기여금 / 변경 후 개당 기여금\n판매량 변화율 = 필요 판매량 / 현재 판매량 - 1\n변경 후 예상 총 기여금 = 변경 후 개당 기여금 × 예상 판매량',

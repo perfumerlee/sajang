@@ -1,0 +1,40 @@
+---
+import ToolKnowledgePage from '../../engine/components/ToolKnowledgePage.astro';
+import SeoHead from '../../engine/components/SeoHead.astro';
+import MoneyInput from '../../engine/components/MoneyInput.astro';
+import PercentageInput from '../../engine/components/PercentageInput.astro';
+import Result from '../../engine/components/Result.astro';
+import { validateProjectDefinition } from '../../engine/validation';
+import { sellingPriceProject, sellingPriceSources, sellingPriceTool } from '../../projects/sajang/tools/selling-price/definition';
+import { calculateSellingPriceModeA, formatPercent, formatWon } from '../../projects/sajang/tools/selling-price/calculator';
+import '../../engine/styles/foundation.css';
+import '../../projects/sajang/styles/selling-price.css';
+validateProjectDefinition(sellingPriceProject, (id) => id === 'selling-price' ? () => calculateSellingPriceModeA : undefined);
+const exampleResult = calculateSellingPriceModeA({ unitCost: 10_000, fixedSellingCost: 2_000, percentageFee: 0.03, targetContributionRate: 0.4 });
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" />
+    <title>{sellingPriceTool.search.title}</title><meta name="description" content={sellingPriceTool.search.description} />
+    <SeoHead tool={sellingPriceTool} projectName="사장도구" categoryName="가격" path="/tools/selling-price/" siteUrl={import.meta.env.PUBLIC_SITE_URL} basePath={import.meta.env.BASE_URL} />
+  </head>
+  <body><main class="engine-container"><ToolKnowledgePage tool={sellingPriceTool} projectName="사장도구" categoryName="가격" sources={sellingPriceSources}>
+    <section slot="calculator" class="engine-calculator" data-selling-price-tool aria-labelledby="selling-price-calculator">
+      <h2 id="selling-price-calculator" class="engine-h2">계산 목적</h2>
+      <div class="selling-price-mode-switch" role="radiogroup" aria-label="계산 목적">
+        <label><input type="radio" name="selling-price-mode" value="a" data-selling-price-mode checked /> 얼마에 팔아야 하지?</label>
+        <label><input type="radio" name="selling-price-mode" value="b" data-selling-price-mode /> 지금 가격에 얼마나 남지?</label>
+      </div>
+      <div class="selling-price-layout">
+        <section class="selling-price-panel" data-selling-price-panel="a"><h3 class="engine-h3">얼마에 팔아야 하지?</h3>
+          <form data-selling-price-form="a"><MoneyInput id="unitCostA" label="단위 비용" required min={0} defaultValue={10000} /><MoneyInput id="fixedSellingCostA" label="고정 판매비" required min={0} defaultValue={2000} /><PercentageInput id="percentageFeeA" label="판매 수수료율" required /><PercentageInput id="targetContributionRateA" label="목표 기여율" required defaultValue={40} /><button class="engine-button" type="submit">계산하기</button><p data-calculator-error class="engine-input-error" role="alert" hidden></p><Result variant="primary" label="계산된 판매가격" value={formatWon(exampleResult.sellingPrice).replace(/원$/, '')} unit="원" id="selling-price-result" /><p>입력 비용과 목표 기여율을 기준으로 계산된 판매가격입니다.</p><p data-result="contributionRate" class="engine-numeric">기여율 기준: {formatPercent(exampleResult.contributionRate)}</p></form>
+        </section>
+        <section class="selling-price-panel" data-selling-price-panel="b" hidden><h3 class="engine-h3">지금 가격에 얼마나 남지?</h3>
+          <form data-selling-price-form="b"><MoneyInput id="sellingPriceB" label="현재 판매가격" required min={0} /><MoneyInput id="unitCostB" label="단위 비용" required min={0} /><MoneyInput id="fixedSellingCostB" label="고정 판매비" required min={0} /><PercentageInput id="percentageFeeB" label="판매 수수료율" required /><button class="engine-button" type="submit">계산하기</button><p data-calculator-error class="engine-input-error" role="alert" hidden></p><Result variant="primary" label="예상 기여금" value="입력 후 계산" id="unit-contribution-result" /><p data-result="unitContribution" class="engine-numeric">입력 비용 차감 후 금액</p><p data-result="contributionRate" class="engine-numeric">기여율</p><p data-result="fee" class="engine-numeric">판매 수수료</p></form>
+        </section>
+      </div>
+    </section>
+  </ToolKnowledgePage></main></body>
+</html>
+<script src="../../projects/sajang/tools/selling-price/client.ts"></script>

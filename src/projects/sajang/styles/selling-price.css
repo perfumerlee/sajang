@@ -1,0 +1,13 @@
+.selling-price-layout { display: block; margin-block-start: calc(var(--space-6) - var(--space-2)); }
+.selling-price-panel { min-width: 0; }
+.selling-price-mode-switch { display: flex; flex-wrap: wrap; gap: var(--space-5); margin-block: var(--space-4); border-block: 1px solid var(--color-rule); padding-block: var(--space-2); }
+.selling-price-mode-switch label { min-height: 48px; display: inline-flex; align-items: center; gap: var(--space-2); border-bottom: 3px solid transparent; padding: var(--space-2) 0; cursor: pointer; }
+.selling-price-mode-switch label:has(input:checked) { border-bottom-color: var(--color-ink); font-weight: 700; }
+.selling-price-mode-switch input { accent-color: var(--color-ink); }
+.selling-price-mode-switch input:focus-visible { outline: 3px solid var(--color-ledger-accent); outline-offset: 3px; }
+.selling-price-panel form { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); column-gap: var(--space-8); align-items: start; }
+.selling-price-panel form > .engine-primary-result { grid-column: 2; grid-row: 1 / span 6; }
+.selling-price-panel form > p:not(.engine-input-error):not([data-result]) { grid-column: 2; }
+.selling-price-panel form > [data-result] { grid-column: 2; }
+.selling-price-panel[hidden] { display: none; }
+@media (max-width: 899px) { .selling-price-panel form { display: block; } .selling-price-panel + .selling-price-panel { border-top: 1px solid var(--color-rule); margin-block-start: var(--space-7); padding-block-start: var(--space-6); } }

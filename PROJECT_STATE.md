@@ -2,8 +2,8 @@
 
 -   Project: Tool Site Engine + Sajang / 사장도구
 -   State format version: 0.02
--   Current Phase: PHASE 6 --- SEO / Metadata / Schema / Sitemap
--   Status: PHASE 6 COMPLETE
+-   Current Phase: PHASE 7 --- Selling Price Tool
+-   Status: PHASE 7 VISUAL REMEDIATION COMPLETE / VIEWPORT RECHECK PENDING
 -   Last verified: 2026-09-08
 
 ## Current Objective
@@ -33,10 +33,11 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 4 calculator runtime and input/result primitives completed.
 -   PHASE 5 `daily-sales-target` Reference Tool completed.
 -   PHASE 6 SEO, metadata, schema, sitemap, and robots.txt completed.
+-   PHASE 7 `selling-price` Tool completed.
 
 ## In Progress
 
--   PHASE 6 is complete. Static production metadata and structured data verified.
+-   PHASE 7 calculation/code verification is complete. Visual remediation is complete; viewport recheck is pending.
 
 ## Not Started
 
@@ -47,7 +48,7 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 4 calculator runtime completed
 -   PHASE 5 daily-sales-target reference Tool completed; Reference Gate PASS
 -   PHASE 6 SEO/schema/sitemap completed
--   PHASE 7 selling-price
+-   PHASE 7 selling-price completed
 -   PHASE 8 price-change
 -   PHASE 9 discount-profit
 -   PHASE 10 hiring-profit
@@ -82,24 +83,25 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Current Known Issues
 
--   No known issues for PHASE 6.
+-   PHASE 7 visual viewport recheck is pending after mode selector and desktop calculator composition remediation.
 
 ## Next Task
 
-PHASE 7 pending. Begin only after a separate request.
+Recheck PHASE 7 visual remediation. PHASE 8 remains pending until separately requested.
 
 Recommended execution: lightweight implementation model.
 
 ## Verification
 
 ``` text
-tests: PASS (`npm test`, 19 tests; locked vector, overflow, boundary, static contract,
-parity, runtime safety, Engine leakage, and SEO contract checks included)
+tests: PASS (`npm test`, 24 tests; locked vectors, validation boundaries, overflow,
+static contract, parity, runtime safety, Engine leakage, and SEO contract checks included)
 typecheck: PASS (`ASTRO_TELEMETRY_DISABLED=1 npm run typecheck`)
 build: PASS (`ASTRO_TELEMETRY_DISABLED=1 npm run build`, static output)
 code gate: PASS
 visual gate: PASS (1440×900, 390×844, 375×812)
 SEO metadata/schema/sitemap: PASS (production HTML and static endpoints verified)
+PHASE 7 calculation/static contract: PASS
 ```
 
 ## Handoff Note

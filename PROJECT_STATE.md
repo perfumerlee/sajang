@@ -11,6 +11,13 @@
 Create the smallest clean Astro/TypeScript static foundation that can
 support the approved Tool Site Engine and Sajang specifications.
 
+## Early Deployment Infrastructure
+
+-   GitHub Pages deployment workflow added for the `main` branch.
+-   Astro static base path is supplied through `BASE_PATH`; the project
+    site workflow uses `/sajang`.
+-   This is deployment infrastructure only and does not start PHASE 1.
+
 ## Completed
 
 -   Product/market direction defined.

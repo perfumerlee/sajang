@@ -1,0 +1,25 @@
+---
+import ToolKnowledgePage from '../../engine/components/ToolKnowledgePage.astro';
+import { staticTool, staticToolSources } from '../../projects/sajang/fixtures/static-tool';
+import '../../engine/styles/foundation.css';
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{staticTool.search.title}</title>
+    <meta name="description" content={staticTool.search.description} />
+  </head>
+  <body>
+    <main class="engine-container">
+      <ToolKnowledgePage
+        tool={staticTool}
+        projectName="사장도구"
+        categoryName="일반 도구"
+        sources={staticToolSources}
+      />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+---
+import NumericInput from './NumericInput.astro';
+const { id, label, ...props } = Astro.props;
+---
+<NumericInput id={id} label={label} {...props} kind="money" unit={props.unit ?? '원'} />

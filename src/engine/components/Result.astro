@@ -1,0 +1,21 @@
+---
+type ResultVariant = 'primary' | 'secondary' | 'comparison' | 'breakdown' | 'formula' | 'interpretation' | 'warning' | 'error';
+interface Props {
+  variant: ResultVariant;
+  label: string;
+  value?: number | string;
+  description?: string;
+  id?: string;
+}
+
+const { variant, label, value, description, id } = Astro.props;
+const safeValue = typeof value === 'number' ? (Number.isFinite(value) ? value.toLocaleString() : '—') : (value?.trim() || '—');
+const className = variant === 'primary' ? 'engine-primary-result' : `engine-result engine-result-${variant}`;
+const live = variant === 'primary' || variant === 'error' ? 'polite' : undefined;
+---
+
+<section id={id} class={className} aria-live={live}>
+  <h3 class="engine-h3">{label}</h3>
+  {variant !== 'interpretation' && <p class="engine-primary-number engine-numeric">{safeValue}</p>}
+  {description && <p>{description}</p>}
+</section>

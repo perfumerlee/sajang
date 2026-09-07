@@ -1,0 +1,29 @@
+---
+import MoneyInput from '../../engine/components/MoneyInput.astro';
+import PercentageInput from '../../engine/components/PercentageInput.astro';
+import Result from '../../engine/components/Result.astro';
+import { sampleCalculator } from '../../projects/sajang/fixtures/sample-calculator';
+import '../../engine/styles/foundation.css';
+
+const result = sampleCalculator({ first: 1200, second: 300 });
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Calculator primitives fixture</title>
+  </head>
+  <body>
+    <main class="engine-container engine-calculator">
+      <h1 class="engine-h1">Calculator primitives fixture</h1>
+      <form>
+        <MoneyInput id="first" label="첫 번째 값" description="실제 calculator와 분리된 입력 primitive입니다." required />
+        <PercentageInput id="rate" label="비율" />
+      </form>
+      <Result variant="primary" label="합계" value={result.total} description="순수 calculator 결과를 renderer가 표시합니다." />
+      <Result variant="error" label="입력 오류 예시" value="입력값을 확인하세요." />
+    </main>
+  </body>
+</html>

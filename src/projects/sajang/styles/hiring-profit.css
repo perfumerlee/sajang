@@ -1,0 +1,9 @@
+.hiring-profit-layout { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); gap: var(--space-8); margin-block-start: calc(var(--space-6) - var(--space-2)); }
+.hiring-profit-input-panel, .hiring-profit-result-panel { min-width: 0; }
+.hiring-profit-result-panel { border-inline-start: 1px solid var(--color-rule); padding-inline-start: var(--space-6); }
+.hiring-profit-results { margin: 0; }
+.hiring-profit-results div { display: flex; justify-content: space-between; gap: var(--space-4); border-top: 1px solid var(--color-rule); padding-block: var(--space-3); }
+.hiring-profit-results dt, .hiring-profit-results dd { margin: 0; }
+.hiring-profit-results dd { text-align: end; overflow-wrap: anywhere; }
+.hiring-profit-meaning { color: var(--color-muted); }
+@media (max-width: 899px) { .hiring-profit-layout { display: block; } .hiring-profit-result-panel { border-inline-start: 0; border-top: 1px solid var(--color-rule); margin-block-start: var(--space-7); padding-inline-start: 0; padding-block-start: var(--space-6); } }

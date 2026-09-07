@@ -2,8 +2,8 @@
 
 -   Project: Tool Site Engine + Sajang / 사장도구
 -   State format version: 0.02
--   Current Phase: PHASE 9 --- Discount Profit Tool
--   Status: PHASE 9 COMPLETE
+-   Current Phase: PHASE 10 --- Hiring Profit Tool
+-   Status: PHASE 10 COMPLETE
 -   Last verified: 2026-09-08
 
 ## Current Objective
@@ -36,10 +36,11 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 7 `selling-price` Tool completed.
 -   PHASE 8 `price-change` Tool completed.
 -   PHASE 9 `discount-profit` Tool completed.
+-   PHASE 10 `hiring-profit` Tool completed.
 
 ## In Progress
 
--   PHASE 9 is complete. Discount Profit calculation, static content, SEO, sitemap, and safety verification passed.
+-   PHASE 10 is complete. Hiring Profit calculation, static content, SEO, sitemap, and safety verification passed.
 
 ## Not Started
 
@@ -54,7 +55,7 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 8 price-change completed
 -   PHASE 9 discount-profit completed
 -   PHASE 9 discount-profit
--   PHASE 10 hiring-profit
+-   PHASE 10 hiring-profit completed
 -   PHASE 11 site pages
 -   PHASE 12 related decisions
 -   PHASE 13 storage/analytics/ad infrastructure
@@ -86,18 +87,18 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Current Known Issues
 
--   No known PHASE 9 blockers remain.
+-   No known PHASE 10 blockers remain.
 
 ## Next Task
 
-PHASE 10 pending. Begin only after a separate request.
+PHASE 11 pending. Begin only after a separate request.
 
 Recommended execution: lightweight implementation model.
 
 ## Verification
 
 ``` text
-tests: PASS (`npm.cmd test`, 38 tests; PHASE 5/7/8 regressions, Discount Profit
+tests: PASS (`npm.cmd test`, 45 tests; PHASE 5/7/8/9 regressions, Hiring Profit
 vectors, validation boundaries, overflow, static contract, parity, runtime safety,
 Engine leakage, and SEO contract checks included)
 typecheck: PASS (`ASTRO_TELEMETRY_DISABLED=1 npm run typecheck`)
@@ -109,6 +110,7 @@ PHASE 7 calculation/static contract: PASS
 PHASE 8 calculation/static contract: PASS
 Price Change production HTML and sitemap inclusion: PASS
 Discount Profit production HTML and sitemap inclusion: PASS
+Hiring Profit production HTML and sitemap inclusion: PASS
 ```
 
 ## Handoff Note

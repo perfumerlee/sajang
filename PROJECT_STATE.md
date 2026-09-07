@@ -2,8 +2,8 @@
 
 -   Project: Tool Site Engine + Sajang / 사장도구
 -   State format version: 0.02
--   Current Phase: PHASE 5 --- Reference Tool: Daily Sales Target
--   Status: PHASE 5 COMPLETE / REFERENCE GATE PASS
+-   Current Phase: PHASE 6 --- SEO / Metadata / Schema / Sitemap
+-   Status: PHASE 6 COMPLETE
 -   Last verified: 2026-09-08
 
 ## Current Objective
@@ -32,10 +32,11 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 3 static page and content engine completed.
 -   PHASE 4 calculator runtime and input/result primitives completed.
 -   PHASE 5 `daily-sales-target` Reference Tool completed.
+-   PHASE 6 SEO, metadata, schema, sitemap, and robots.txt completed.
 
 ## In Progress
 
--   PHASE 5 is complete. Code Gate PASS and Visual Gate PASS.
+-   PHASE 6 is complete. Static production metadata and structured data verified.
 
 ## Not Started
 
@@ -45,7 +46,7 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 3 static page engine completed
 -   PHASE 4 calculator runtime completed
 -   PHASE 5 daily-sales-target reference Tool completed; Reference Gate PASS
--   PHASE 6 SEO/schema/sitemap
+-   PHASE 6 SEO/schema/sitemap completed
 -   PHASE 7 selling-price
 -   PHASE 8 price-change
 -   PHASE 9 discount-profit
@@ -81,23 +82,24 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Current Known Issues
 
--   No PHASE 5 Reference Gate blockers remain.
+-   No known issues for PHASE 6.
 
 ## Next Task
 
-PHASE 6 pending. Begin only after a separate request.
+PHASE 7 pending. Begin only after a separate request.
 
 Recommended execution: lightweight implementation model.
 
 ## Verification
 
 ``` text
-tests: PASS (`npm test`, 18 tests; locked vector, overflow, boundary, static contract,
-parity, runtime safety, and Engine leakage checks included)
+tests: PASS (`npm test`, 19 tests; locked vector, overflow, boundary, static contract,
+parity, runtime safety, Engine leakage, and SEO contract checks included)
 typecheck: PASS (`ASTRO_TELEMETRY_DISABLED=1 npm run typecheck`)
 build: PASS (`ASTRO_TELEMETRY_DISABLED=1 npm run build`, static output)
 code gate: PASS
 visual gate: PASS (1440×900, 390×844, 375×812)
+SEO metadata/schema/sitemap: PASS (production HTML and static endpoints verified)
 ```
 
 ## Handoff Note

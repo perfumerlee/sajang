@@ -38,4 +38,24 @@ describe('PHASE 5 reference gate source contracts', () => {
     expect(foundation).toContain('overflow-wrap: anywhere');
     expect(projectStyles).not.toContain('.daily-sales-formula');
   });
+
+  it('declares generic static SEO outputs and published sitemap filtering', () => {
+    const seo = readFileSync('src/engine/components/SeoHead.astro', 'utf8');
+    const seoRuntime = readFileSync('src/engine/seo.ts', 'utf8');
+    const sitemap = readFileSync('src/pages/sitemap.xml.ts', 'utf8');
+    const robots = readFileSync('src/pages/robots.txt.ts', 'utf8');
+    const page = readFileSync('src/pages/tools/daily-sales-target.astro', 'utf8');
+    expect(seo).toContain('rel="canonical"');
+    expect(seo).toContain('name="robots"');
+    expect(seo).toContain('og:title');
+    expect(seo).toContain('application/ld+json');
+    expect(seoRuntime).toContain("tool.identity.status === 'published'");
+    expect(seoRuntime).toContain("'WebSite'");
+    expect(seoRuntime).toContain("'WebPage'");
+    expect(seoRuntime).toContain("'WebApplication'");
+    expect(seoRuntime).toContain("'BreadcrumbList'");
+    expect(sitemap).toContain("status === 'published'");
+    expect(robots).toContain('Sitemap:');
+    expect(page).toContain('<SeoHead');
+  });
 });

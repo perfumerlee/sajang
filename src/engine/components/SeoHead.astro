@@ -1,0 +1,30 @@
+---
+import type { ToolDefinition } from '../contracts';
+import { buildStructuredData, shouldIndex, toCanonicalUrl } from '../seo';
+
+interface Props {
+  tool: ToolDefinition;
+  projectName: string;
+  categoryName: string;
+  path: string;
+  siteUrl?: string;
+  basePath?: string;
+}
+
+const { tool, projectName, categoryName, path, siteUrl, basePath = '/' } = Astro.props;
+const canonical = toCanonicalUrl({ tool, projectName, categoryName, siteUrl, basePath }, path);
+const indexable = shouldIndex(tool);
+const robots = indexable ? 'index,follow' : 'noindex,nofollow';
+const jsonLd = JSON.stringify(buildStructuredData({ tool, projectName, categoryName, siteUrl, basePath }, canonical))
+  .replace(/</g, '\\u003c');
+---
+
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={robots} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={tool.search.title} />
+<meta property="og:description" content={tool.search.description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={projectName} />
+<meta property="og:locale" content="ko_KR" />
+<script type="application/ld+json" is:inline set:html={jsonLd}></script>

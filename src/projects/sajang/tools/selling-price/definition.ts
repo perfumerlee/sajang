@@ -18,7 +18,7 @@ export const sellingPriceTool: ToolDefinition = {
     faq: [{ question: '계산된 판매가격이 시장 가격과 달라도 되나요?', answer: '이 도구는 비용과 목표 기여율 기준을 계산하므로 시장 수요와 경쟁가격을 별도로 확인해야 합니다.' }, { question: '수수료율과 목표 기여율의 합이 100%면 어떻게 되나요?', answer: '비용을 나눌 기준이 없어 유효한 판매가격을 계산하지 않고 오류를 표시합니다.' }],
   },
   interaction: { inputs: [], outputs: [], calculator: 'selling-price' },
-  relations: { relatedTools: [], relatedDecisions: [{ toolId: 'daily-sales-target', question: '계산된 가격으로 목표 매출을 달성할 수 있을까요?', label: '하루 목표 매출과 필요한 판매량을 함께 확인해보세요.' }], sources: ['sajang-selling-price-spec'] },
+  relations: { relatedTools: [], relatedDecisions: [{ toolId: 'price-change', question: '가격을 바꾸면 필요한 판매량은 어떻게 달라질까요?', label: '가격 변경에 따른 판매량 변화를 확인해보세요.' }, { toolId: 'discount-profit', question: '할인해도 현재 총 기여금을 유지할 수 있을까요?', label: '할인 후 필요한 판매량 증가를 계산해보세요.' }], sources: ['sajang-selling-price-spec'] },
   maintenance: { reviewedAt: '2026-09-08' },
 };
 

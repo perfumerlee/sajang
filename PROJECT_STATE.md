@@ -2,8 +2,8 @@
 
 -   Project: Tool Site Engine + Sajang / 사장도구
 -   State format version: 0.02
--   Current Phase: PHASE 11 --- Homepage / About / Privacy / Contact
--   Status: PHASE 11 Visual Remediation complete; viewport recheck pending
+-   Current Phase: PHASE 12 --- Related Decision Navigation
+-   Status: PHASE 12 COMPLETE
 -   Last verified: 2026-09-08
 
 ## Current Objective
@@ -38,10 +38,11 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 9 `discount-profit` Tool completed.
 -   PHASE 10 `hiring-profit` Tool completed.
 -   PHASE 11 site pages, shared shell, truthful privacy/contact documents, and homepage Tool index completed.
+-   PHASE 12 Related Decision Navigation completed with static, BASE_PATH-aware links.
 
 ## In Progress
 
--   PHASE 11 site pages and requested Homepage visual remediation are complete. Viewport recheck remains pending.
+-   PHASE 12 is complete. Related decision graph, static HTML links, published filtering, and BASE_PATH verification passed.
 
 ## Not Started
 
@@ -58,7 +59,7 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 9 discount-profit
 -   PHASE 10 hiring-profit completed
 -   PHASE 11 site pages completed
--   PHASE 12 related decisions (waiting)
+-   PHASE 12 related decisions completed
 -   PHASE 13 storage/analytics/ad infrastructure
 -   PHASE 14 cross-project fixture
 -   PHASE 15 final QA
@@ -88,11 +89,11 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Current Known Issues
 
--   No known PHASE 11 code blockers remain; post-remediation viewport recheck is pending.
+-   No known PHASE 12 code blockers remain. Exact visual viewport review remains a separate QA concern.
 
 ## Next Task
 
-PHASE 12 pending. Begin only after a separate request. Recheck Homepage at 1440×900 and 375×812 before closing the visual remediation review.
+PHASE 13 pending. Begin only after a separate request.
 
 Recommended execution: lightweight implementation model.
 
@@ -115,6 +116,9 @@ Hiring Profit production HTML and sitemap inclusion: PASS
 PHASE 11 site route, homepage content, navigation, privacy truthfulness, and sitemap tests: PASS
 PHASE 11 default static build routes and metadata inspection: PASS
 PHASE 11 BASE_PATH=/sajang build and link/canonical/sitemap inspection: PASS
+PHASE 12 relation graph and static link tests: PASS (50 tests)
+PHASE 12 production HTML related sections and destination links: PASS
+PHASE 12 BASE_PATH=/sajang related-link inspection: PASS
 ```
 
 ## Handoff Note

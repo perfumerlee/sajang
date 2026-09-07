@@ -37,9 +37,9 @@ export const dailySalesTargetTool: ToolDefinition = {
   relations: {
     relatedTools: [],
     relatedDecisions: [
-      { toolId: 'selling-price', question: '목표 매출이 너무 높나요?', label: '가격을 바꾸면 어떻게 달라지는지 계산해보세요.' },
-      { toolId: 'price-change', question: '가격을 올려도 될까요?', label: '가격 변경의 영향을 별도로 검토해보세요.' },
-      { toolId: 'hiring-profit', question: '직원을 더 써도 될까요?', label: '추가 인건비가 필요한 매출에 미치는 영향을 검토해보세요.' },
+      { toolId: 'selling-price', question: '이 매출을 만들려면 얼마에 팔아야 할까요?', label: '판매가격과 기여금을 계산해보세요.' },
+      { toolId: 'price-change', question: '가격을 바꾸면 필요한 판매량은 어떻게 달라질까요?', label: '가격 변경에 따른 판매량 변화를 확인해보세요.' },
+      { toolId: 'hiring-profit', question: '직원을 한 명 더 쓰려면 매출이 얼마나 더 필요할까요?', label: '추가 직원 비용에 필요한 매출을 계산해보세요.' },
     ],
     sources: ['sajang-daily-sales-spec'],
   },

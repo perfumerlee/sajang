@@ -18,7 +18,7 @@ export const priceChangeTool: ToolDefinition = {
     faq: [{ question: '현재 판매량과 예상 판매량의 기간은 달라도 되나요?', answer: '아니요. 현재 판매량과 예상 판매량은 같은 비교 기간을 기준으로 입력해야 합니다.' }, { question: '변경 후 개당 기여금이 0 이하이면 어떻게 되나요?', answer: '판매량 증가만으로 현재 총 기여금을 유지하는 정상적인 계산이 성립하지 않으므로 경고를 표시합니다.' }],
   },
   interaction: { inputs: [], outputs: [], calculator: 'price-change' },
-  relations: { relatedTools: [], relatedDecisions: [{ toolId: 'discount-profit', question: '가격을 내리면 어떨까요?', label: '할인 후 필요한 판매량을 검토해보세요.' }, { toolId: 'daily-sales-target', question: '변경 가격으로 목표 매출을 달성할 수 있을까요?', label: '하루 목표 매출을 함께 확인해보세요.' }, { toolId: 'selling-price', question: '비용 기준 가격은 얼마인가요?', label: '계산된 판매가격을 확인해보세요.' }], sources: ['sajang-price-change-spec'] },
+  relations: { relatedTools: [], relatedDecisions: [{ toolId: 'discount-profit', question: '가격을 내리면 필요한 판매량은 어떻게 달라질까요?', label: '할인 후 필요한 판매량 증가를 계산해보세요.' }, { toolId: 'daily-sales-target', question: '변경 가격으로 목표 매출을 달성할 수 있을까요?', label: '하루 목표 매출을 함께 확인해보세요.' }, { toolId: 'selling-price', question: '비용 기준으로 계산된 판매가격은 얼마인가요?', label: '판매가격과 기여금을 확인해보세요.' }], sources: ['sajang-price-change-spec'] },
   maintenance: { reviewedAt: '2026-09-08' },
 };
 

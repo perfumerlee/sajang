@@ -16,7 +16,7 @@ export const discountProfitTool: ToolDefinition = {
     faq: [{ question: '할인율 0%도 계산할 수 있나요?', answer: '네. 할인 판매가격과 개당 기여금 변화가 없고 현재와 같은 판매량이 필요하다는 결과를 보여줍니다.' }, { question: '할인 후 개당 기여금이 0 이하이면 어떻게 되나요?', answer: '판매량을 늘리는 것만으로 현재 총 기여금을 유지하는 계산이 성립하지 않으므로 경고를 표시합니다.' }],
   },
   interaction: { inputs: [], outputs: [], calculator: 'discount-profit' },
-  relations: { relatedTools: [], relatedDecisions: [{ toolId: 'price-change', question: '가격 변경의 영향을 함께 볼까요?', label: '가격 변경에 따른 판매량 변화를 확인해보세요.' }, { toolId: 'selling-price', question: '비용 기준 판매가격은 얼마인가요?', label: '계산된 판매가격을 확인해보세요.' }], sources: ['sajang-discount-profit-spec'] },
+  relations: { relatedTools: [], relatedDecisions: [{ toolId: 'price-change', question: '할인 대신 가격을 바꾸면 필요한 판매량은 어떻게 달라질까요?', label: '가격 변경에 따른 판매량 변화를 확인해보세요.' }, { toolId: 'selling-price', question: '할인 전후 비용 기준 판매가격은 얼마인가요?', label: '판매가격과 기여금을 확인해보세요.' }], sources: ['sajang-discount-profit-spec'] },
   maintenance: { reviewedAt: '2026-09-08' },
 };
 export const discountProfitProject: ProjectDefinition = { id: 'sajang', name: '사장도구', description: '장사를 하며 필요한 숫자를 계산하는 도구', locale: 'ko-KR', baseUrl: '/', owner: 'Sajang', navigation: [], features: { localStorage: false, analytics: false, ads: false, remoteData: false }, theme: { id: 'working-ledger' }, categories: [{ id: 'pricing', name: '가격', question: '할인해도 될까?', description: '할인과 기여금 변화를 계산합니다.', tools: ['discount-profit'], status: 'published' }], tools: [discountProfitTool], sources: discountProfitSources };

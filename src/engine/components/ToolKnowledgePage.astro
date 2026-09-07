@@ -12,6 +12,7 @@ interface Props {
 }
 
 const { tool, projectName, categoryName, sources, relatedTools = [] } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const sourceById = new Map(sources.map((source) => [source.id, source]));
 const formatValue = (value: number | string | boolean) => typeof value === 'number' ? value.toLocaleString() : String(value);
 ---
@@ -90,10 +91,13 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
 
   {(relatedTools.length > 0 || (tool.relations.relatedDecisions?.length ?? 0) > 0) && (
     <section aria-labelledby="related-tools" class="engine-section">
-      <h2 id="related-tools" class="engine-h2">관련 도구</h2>
-      <ul>
-        {relatedTools.map((related) => <li><a href={`/tools/${related.identity.slug}/`}>{related.search.name}</a></li>)}
-        {tool.relations.relatedDecisions?.map((related) => <li>{related.question} — {related.label}</li>)}
+      <h2 id="related-tools" class="engine-h2">다음으로 계산해볼 것</h2>
+      <ul class="engine-related-decisions">
+        {tool.relations.relatedDecisions?.map((relation) => {
+          const destination = relatedTools.find((candidate) => candidate.identity.id === relation.toolId);
+          const slug = destination?.identity.slug ?? relation.toolId;
+          return <li><a href={`${base}tools/${slug}/`}><span class="engine-related-question">{relation.question}</span><span class="engine-related-tool">{destination?.search.name ?? relation.label}</span><span class="engine-related-label">{destination ? relation.label : '계산할 조건을 확인해보세요.'}</span></a></li>;
+        })}
       </ul>
     </section>
   )}

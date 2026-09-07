@@ -10,6 +10,7 @@ import { dailySalesTargetProject, dailySalesTargetSources, dailySalesTargetTool 
 import { calculateDailySalesTarget, formatPercent, formatWon } from '../../projects/sajang/tools/daily-sales-target/calculator';
 import '../../engine/styles/foundation.css';
 import '../../projects/sajang/styles/daily-sales-target.css';
+import { resolveRelatedTools } from '../../projects/sajang/tools/registry';
 
 validateProjectDefinition(dailySalesTargetProject, (id) => id === 'daily-sales-target' ? () => calculateDailySalesTarget : undefined);
 const exampleInput = { fixedCost: 4_000_000, variableRate: 0.35, operatingDays: 26, targetProfit: 3_000_000 };
@@ -27,7 +28,7 @@ const exampleResult = calculateDailySalesTarget(exampleInput);
   </head>
   <body>
     <main class="engine-container engine-calculator">
-      <ToolKnowledgePage tool={dailySalesTargetTool} projectName="사장도구" categoryName="매출" sources={dailySalesTargetSources}>
+      <ToolKnowledgePage tool={dailySalesTargetTool} projectName="사장도구" categoryName="매출" sources={dailySalesTargetSources} relatedTools={resolveRelatedTools(dailySalesTargetTool)}>
         <section slot="calculator" aria-labelledby="calculator-inputs" class="engine-calculator daily-sales-layout">
           <section class="daily-sales-input-panel">
             <h2 id="calculator-inputs" class="engine-h2">계산 조건</h2>

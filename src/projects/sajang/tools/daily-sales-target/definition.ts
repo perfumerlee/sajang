@@ -17,6 +17,7 @@ export const dailySalesTargetTool: ToolDefinition = {
     description: '월 고정비, 변동비율, 영업일과 목표수익을 입력하면 손익분기 월매출과 하루 목표 매출을 계산한다.',
   },
   knowledge: {
+    exampleInputDisplay: { variableRate: formatPercent(exampleInput.variableRate) }, exampleLabels: { inputs: { fixedCost: '월 고정비', variableRate: '평균 변동비율', targetProfit: '월 목표수익', operatingDays: '월 영업일' }, result: { contributionRate: '공헌이익률', targetMonthly: '목표 월매출', targetDaily: '하루 목표 매출' } },
     shortAnswer: `예를 들어 월 고정비 4,000,000원, 평균 변동비율 35%, 월 목표수익 3,000,000원, 월 영업일 26일이라면 하루 목표 매출은 약 ${formatWon(exampleResult.targetDaily)}입니다. 실제 결과는 계산기에 입력한 조건에 따라 달라집니다.`,
     definition: '하루 목표 매출은 월 고정비와 월 목표수익을 공헌이익률로 나눈 뒤 월 영업일로 나눈 예상 기준입니다.',
     howItWorks: '변동비율을 제외한 공헌이익률을 구하고, 손익분기 매출과 목표수익을 포함한 목표 매출을 각각 계산합니다.',
@@ -25,7 +26,7 @@ export const dailySalesTargetTool: ToolDefinition = {
       title: '월 고정비 4,000,000원, 변동비율 35%, 목표수익 3,000,000원, 월 영업일 26일',
       inputs: exampleInput,
       result: { contributionRate: formatPercent(exampleResult.contributionRate), targetMonthly: formatWon(exampleResult.targetMonthly), targetDaily: formatWon(exampleResult.targetDaily) },
-      explanation: `production calculator 결과 공헌이익률 ${formatPercent(exampleResult.contributionRate)}, 목표 월매출 ${formatWon(exampleResult.targetMonthly)}, 하루 목표 매출 ${formatWon(exampleResult.targetDaily)}입니다.`,
+      explanation: `계산 결과 공헌이익률 ${formatPercent(exampleResult.contributionRate)}, 목표 월매출 ${formatWon(exampleResult.targetMonthly)}, 하루 목표 매출 ${formatWon(exampleResult.targetDaily)}입니다.`,
     },
     limitations: ['입력한 비용과 조건을 바탕으로 한 단순 추정치입니다.', '실제 세금, 부가가치세, 금융비용 및 기타 비용에 따라 달라질 수 있습니다.', '목표수익은 세후 실수령액이 아니라 비용 충당 후 목표하는 추가 금액입니다.'],
     faq: [
@@ -37,7 +38,7 @@ export const dailySalesTargetTool: ToolDefinition = {
   relations: {
     relatedTools: [],
     relatedDecisions: [
-      { toolId: 'selling-price', question: '이 매출을 만들려면 얼마에 팔아야 할까요?', label: '판매가격과 기여금을 계산해보세요.' },
+      { toolId: 'selling-price', question: '이 매출을 만들려면 얼마에 팔아야 할까요?', label: '판매가격과 비용을 빼고 남는 금액을 계산해보세요.' },
       { toolId: 'price-change', question: '가격을 바꾸면 필요한 판매량은 어떻게 달라질까요?', label: '가격 변경에 따른 판매량 변화를 확인해보세요.' },
       { toolId: 'hiring-profit', question: '직원을 한 명 더 쓰려면 매출이 얼마나 더 필요할까요?', label: '추가 직원 비용에 필요한 매출을 계산해보세요.' },
     ],

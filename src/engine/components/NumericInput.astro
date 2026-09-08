@@ -18,6 +18,7 @@ const { id, label, kind, description, unit, required = false, defaultValue, min,
 const descriptionId = description ? `${id}-description` : undefined;
 const errorId = `${id}-error`;
 const describedBy = [descriptionId, error ? errorId : undefined].filter(Boolean).join(' ') || undefined;
+const displayValue = defaultValue === undefined ? undefined : kind === 'money' ? defaultValue.toLocaleString('ko-KR') : defaultValue;
 ---
 
 <div class="engine-input-field" data-input-field={id}>
@@ -27,9 +28,10 @@ const describedBy = [descriptionId, error ? errorId : undefined].filter(Boolean)
     <input
       id={id}
       name={id}
-      type="number"
+      type={kind === 'money' ? 'text' : 'number'}
       inputmode={kind === 'percentage' || kind === 'number' || kind === 'quantity' || kind === 'days' ? 'decimal' : 'decimal'}
-      value={defaultValue}
+      value={displayValue}
+      data-money-input={kind === 'money' ? 'true' : undefined}
       min={min}
       max={max}
       step={step}
@@ -43,3 +45,17 @@ const describedBy = [descriptionId, error ? errorId : undefined].filter(Boolean)
   </div>
   <p id={errorId} data-input-error role="alert" class="engine-input-error" hidden>{error}</p>
 </div>
+
+{kind === 'money' && <script>
+  const formatMoneyInput = (input: HTMLInputElement) => {
+    const raw = input.value.replaceAll(',', '').replace(/[^\d.-]/g, '');
+    if (raw === '' || raw === '-') return;
+    const [integer, decimal] = raw.split('.');
+    input.value = `${Number(integer).toLocaleString('ko-KR')}${decimal !== undefined ? `.${decimal}` : ''}`;
+  };
+  document.querySelectorAll<HTMLInputElement>('[data-money-input="true"]').forEach((input) => {
+    input.addEventListener('focus', () => { input.value = input.value.replaceAll(',', ''); });
+    input.addEventListener('input', () => formatMoneyInput(input));
+    input.addEventListener('blur', () => formatMoneyInput(input));
+  });
+</script>}

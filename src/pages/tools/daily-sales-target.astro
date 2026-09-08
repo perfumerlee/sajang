@@ -1,4 +1,5 @@
 ---
+import SiteHeader from '../../engine/components/SiteHeader.astro';
 import ToolKnowledgePage from '../../engine/components/ToolKnowledgePage.astro';
 import SeoHead from '../../engine/components/SeoHead.astro';
 import MoneyInput from '../../engine/components/MoneyInput.astro';
@@ -26,18 +27,18 @@ const exampleResult = calculateDailySalesTarget(exampleInput);
     <meta name="description" content={dailySalesTargetTool.search.description} />
     <SeoHead tool={dailySalesTargetTool} projectName="사장도구" categoryName="매출" path={`/tools/${dailySalesTargetTool.identity.slug}/`} siteUrl={import.meta.env.PUBLIC_SITE_URL} basePath={import.meta.env.BASE_URL} />
   </head>
-  <body>
+  <body><SiteHeader brand="사장도구" />
     <main class="engine-container engine-calculator">
-      <ToolKnowledgePage tool={dailySalesTargetTool} projectName="사장도구" categoryName="매출" sources={dailySalesTargetSources} relatedTools={resolveRelatedTools(dailySalesTargetTool)}>
+      <ToolKnowledgePage showHeader={false} tool={dailySalesTargetTool} projectName="사장도구" categoryName="매출" sources={dailySalesTargetSources} relatedTools={resolveRelatedTools(dailySalesTargetTool)}>
         <section slot="calculator" aria-labelledby="calculator-inputs" class="engine-calculator daily-sales-layout">
           <section class="daily-sales-input-panel">
             <h2 id="calculator-inputs" class="engine-h2">계산 조건</h2>
             <form data-daily-sales-target-form>
-              <MoneyInput id="fixedCost" label="월 고정비" description="판매량 변화와 직접 비례하지 않는 비용입니다." required min={0} defaultValue={exampleInput.fixedCost} />
-              <PercentageInput id="variableRate" label="평균 변동비율" description="매출에서 재료비·수수료처럼 변동하는 비율입니다." required defaultValue={35} />
-              <DaysInput id="operatingDays" label="월 영업일" required max={31} defaultValue={exampleInput.operatingDays} />
-              <MoneyInput id="targetProfit" label="월 목표수익" description="고정비를 충당한 뒤 추가로 목표하는 금액입니다." required min={0} defaultValue={exampleInput.targetProfit} />
-              <MoneyInput id="averageOrderValue" label="평균 객단가" description="선택 입력. 필요 고객 수를 계산합니다." min={0} />
+              <MoneyInput id="fixedCost" label="매출이 없어도 매달 나가는 비용" description="임대료, 인건비처럼 매출과 상관없이 매달 부담하는 비용을 입력하세요." required min={0} defaultValue={exampleInput.fixedCost} />
+              <PercentageInput id="variableRate" label="매출 100원 중 비용으로 나가는 비율" description="재료비·판매 수수료처럼 매출이 늘면 함께 늘어나는 비용의 비율입니다." required defaultValue={35} />
+              <DaysInput id="operatingDays" label="한 달에 영업하는 날" description="한 달 동안 실제로 영업하는 날을 입력하세요." required max={31} defaultValue={exampleInput.operatingDays} />
+              <MoneyInput id="targetProfit" label="고정비를 내고 남기고 싶은 금액" description="고정비를 모두 낸 뒤 한 달에 추가로 남기고 싶은 금액입니다." required min={0} defaultValue={exampleInput.targetProfit} />
+              <MoneyInput id="averageOrderValue" label="한 번 결제할 때 평균 금액" description="선택 입력. 하루 목표 매출에 필요한 고객·주문 수를 계산합니다." min={0} />
               <button class="engine-button" type="submit">계산하기</button>
               <p data-calculator-error class="engine-input-error" role="alert" hidden></p>
             </form>
@@ -45,12 +46,12 @@ const exampleResult = calculateDailySalesTarget(exampleInput);
           <section aria-labelledby="calculator-result" class="daily-sales-result-panel">
             <h2 id="calculator-result" class="engine-h2">계산 결과</h2>
             <Result variant="primary" label="하루 평균 목표 매출" value={formatWon(exampleResult.targetDaily).replace(/원$/, '')} unit="원" id="target-daily-result" />
-            <p class="daily-sales-meaning">입력한 조건에서 월 목표수익을 달성하기 위한 하루 평균 목표 매출입니다.</p>
+            <p class="daily-sales-meaning">입력한 비용과 목표 금액을 충당하려면 하루에 필요한 매출입니다.</p>
             <dl class="daily-sales-results">
               <div><dt>목표 월매출</dt><dd data-result="targetMonthly" class="engine-numeric">{formatWon(exampleResult.targetMonthly)}</dd></div>
               <div><dt>손익분기 월매출</dt><dd data-result="breakEvenMonthly" class="engine-numeric">{formatWon(exampleResult.breakEvenMonthly)}</dd></div>
               <div><dt>손익분기 일매출</dt><dd data-result="breakEvenDaily" class="engine-numeric">{formatWon(exampleResult.breakEvenDaily)}</dd></div>
-              <div><dt>공헌이익률</dt><dd data-result="contributionRate" class="engine-numeric">{formatPercent(exampleResult.contributionRate)}</dd></div>
+              <div><dt>비용을 제외하고 남는 비율</dt><dd data-result="contributionRate" class="engine-numeric">{formatPercent(exampleResult.contributionRate)}</dd></div>
               <div><dt>필요 고객/주문 수</dt><dd data-result="customersNeeded" class="engine-numeric">객단가 입력 시 계산</dd></div>
             </dl>
           </section>

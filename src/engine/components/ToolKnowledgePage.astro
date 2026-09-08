@@ -9,32 +9,31 @@ interface Props {
   categoryName: string;
   sources: SourceDefinition[];
   relatedTools?: ToolDefinition[];
+  showHeader?: boolean;
 }
 
-const { tool, projectName, categoryName, sources, relatedTools = [] } = Astro.props;
+const { tool, projectName, sources, relatedTools = [], showHeader = true } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const sourceById = new Map(sources.map((source) => [source.id, source]));
 const formatValue = (value: number | string | boolean) => typeof value === 'number' ? value.toLocaleString() : String(value);
 ---
 
-<SiteHeader brand={projectName} />
+{showHeader && <SiteHeader brand={projectName} />}
 <article class="engine-knowledge-page">
-  <nav aria-label="Breadcrumb" class="engine-small">
-    <a href="/">{projectName}</a>
-    <span aria-hidden="true"> / </span>
-    <span>{categoryName}</span>
-    <span aria-hidden="true"> / </span>
-    <span>{tool.search.name}</span>
+  <nav aria-label="Breadcrumb" class="engine-breadcrumb">
+    <a href={base}>{projectName}</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">{tool.search.name}</span>
   </nav>
 
   <header class="engine-knowledge-header">
     <p class="engine-small">{tool.search.question}</p>
-    <h1 class="engine-h1">{tool.search.title}</h1>
+    <h1 class="engine-h1">{tool.search.name}</h1>
     <p>{tool.search.description}</p>
   </header>
 
   <section aria-labelledby="quick-answer" class="engine-section">
-    <h2 id="quick-answer" class="engine-h2">빠른 답변</h2>
+    <h2 id="quick-answer" class="engine-h2">계산 예시</h2>
     <p>{tool.knowledge.shortAnswer}</p>
   </section>
 
@@ -55,22 +54,25 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
     <pre class="engine-formula"><code>{tool.knowledge.formula}</code></pre>
   </section>
 
-  <section aria-labelledby="example" class="engine-section">
+  <slot name="example">
+  <section aria-labelledby="example" class="engine-section engine-example">
     <h2 id="example" class="engine-h2">검증된 예시</h2>
     <p>{tool.knowledge.example.title}</p>
-    <dl>
+    <dl class="engine-example-list">
       {Object.entries(tool.knowledge.example.inputs).map(([label, value]) => (
-        <div><dt>{label}</dt><dd class="engine-numeric">{formatValue(value)}</dd></div>
+        <div><dt>{tool.knowledge.exampleLabels?.inputs[label] ?? label}</dt><dd class="engine-numeric">{tool.knowledge.exampleInputDisplay?.[label] ?? formatValue(value)}</dd></div>
       ))}
     </dl>
     <h3 class="engine-h3">결과</h3>
-    <dl>
+    <dl class="engine-example-list engine-example-result">
       {Object.entries(tool.knowledge.example.result).map(([label, value]) => (
-        <div><dt>{label}</dt><dd class="engine-numeric">{formatValue(value)}</dd></div>
+        <div><dt>{tool.knowledge.exampleLabels?.result[label] ?? label}</dt><dd class="engine-numeric">{formatValue(value)}</dd></div>
       ))}
     </dl>
     <p>{tool.knowledge.example.explanation}</p>
   </section>
+
+  </slot>
 
   <section aria-labelledby="limitations" class="engine-section">
     <h2 id="limitations" class="engine-h2">한계</h2>
@@ -93,16 +95,16 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
     <section aria-labelledby="related-tools" class="engine-section">
       <h2 id="related-tools" class="engine-h2">다음으로 계산해볼 것</h2>
       <ul class="engine-related-decisions">
-        {tool.relations.relatedDecisions?.map((relation) => {
+        {tool.relations.relatedDecisions?.map((relation, index) => {
           const destination = relatedTools.find((candidate) => candidate.identity.id === relation.toolId);
           const slug = destination?.identity.slug ?? relation.toolId;
-          return <li><a href={`${base}tools/${slug}/`}><span class="engine-related-question">{relation.question}</span><span class="engine-related-tool">{destination?.search.name ?? relation.label}</span><span class="engine-related-label">{destination ? relation.label : '계산할 조건을 확인해보세요.'}</span></a></li>;
+          return <li><a href={`${base}tools/${slug}/`}><span class="engine-related-index">0{index + 1}</span><span class="engine-related-copy"><span class="engine-related-question">{relation.question}</span><span class="engine-related-tool">{destination?.search.name ?? relation.label}</span><span class="engine-related-label">{destination ? relation.label : '계산할 조건을 확인해보세요.'}</span></span><span class="engine-related-arrow" aria-hidden="true">→</span></a></li>;
         })}
       </ul>
     </section>
   )}
 
-  <footer class="engine-section engine-small">
+  <footer class="engine-section engine-small engine-sources">
     <h2 class="engine-h3">출처 및 검토 정보</h2>
     <ul>
       {tool.relations.sources.map((sourceId) => {
@@ -115,3 +117,36 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
   </div>
 </article>
 <SiteFooter brand={projectName} />
+
+<script>
+  const clearInitialCalculatorExample = (input: HTMLInputElement) => {
+    const form = input.closest<HTMLFormElement>('form');
+    const calculator = input.closest<HTMLElement>('.engine-calculator');
+    if (!form || !calculator) return;
+    const resultScope = form.querySelector<HTMLElement>('[data-result-value], [data-result], [data-calculator-meaning]') ? form : calculator;
+    if (form.dataset.userEdited !== 'true') {
+      form.dataset.userEdited = 'true';
+      form.querySelectorAll<HTMLInputElement>('input:not([type="radio"]):not([type="checkbox"])').forEach((otherInput) => {
+        if (otherInput !== input) otherInput.value = '';
+      });
+    }
+    resultScope?.querySelectorAll<HTMLElement>('[data-result-value], [data-result], [data-result-number]').forEach((element) => {
+      if (!element.matches('[data-result-number]') && element.querySelector('[data-result-number]')) return;
+      element.textContent = '—';
+    });
+    resultScope?.querySelectorAll<HTMLElement>('[data-calculator-meaning]').forEach((element) => {
+      element.textContent = '입력한 조건으로 계산하면 결과가 표시됩니다.';
+    });
+  };
+
+  document.addEventListener('focusin', (event) => {
+    const input = event.target;
+    if (!(input instanceof HTMLInputElement) || input.type === 'radio' || input.type === 'checkbox') return;
+    const form = input.closest<HTMLFormElement>('form');
+    if (form?.dataset.userEdited !== 'true' && input.value !== '') input.select();
+  });
+  document.addEventListener('input', (event) => {
+    const input = event.target;
+    if (input instanceof HTMLInputElement && input.type !== 'radio' && input.type !== 'checkbox') clearInitialCalculatorExample(input);
+  });
+</script>

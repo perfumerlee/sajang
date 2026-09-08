@@ -39,7 +39,7 @@ describe('selling-price production calculator', () => {
     for (const section of ['shortAnswer', 'definition', 'howItWorks', 'formula', 'example', 'limitations', 'faq', 'relatedDecisions', 'sources']) expect(readFileSync('src/projects/sajang/tools/selling-price/definition.ts', 'utf8')).toContain(section);
     expect(page).toContain('ToolKnowledgePage');
     expect(page).toContain('계산된 판매가격');
-    expect(page).toContain('예상 기여금');
+    expect(page).toContain('예상 남는 금액');
     expect(page).toContain('value={formatWon(exampleResult.sellingPrice).replace(/원$/, \'\')}');
     expect(client).toContain('setFiniteResult');
     expect(client).toContain('clear(form)');

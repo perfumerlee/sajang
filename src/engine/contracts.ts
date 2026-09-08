@@ -62,6 +62,8 @@ export interface ToolKnowledgeContent {
   howItWorks: string;
   formula: string;
   example: VerifiedExampleDefinition;
+  exampleLabels?: { inputs: Record<string, string>; result: Record<string, string> };
+  exampleInputDisplay?: Record<string, string>;
   limitations: string[];
   faq: Array<{ question: string; answer: string }>;
 }

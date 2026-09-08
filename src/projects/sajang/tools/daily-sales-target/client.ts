@@ -23,7 +23,7 @@ if (form) {
   };
   const clearResults = () => [targetDaily, resultElement('targetMonthly'), resultElement('breakEvenMonthly'), resultElement('breakEvenDaily'), resultElement('contributionRate'), resultElement('customersNeeded')].forEach((element) => { if (element) element.textContent = '—'; });
 
-  const readNumber = (name: string): number => Number(new FormData(form).get(name));
+  const readNumber = (name: string): number => Number(String(new FormData(form).get(name) ?? '').replaceAll(',', ''));
   form.addEventListener('invalid', (event) => {
     const input = event.target as HTMLInputElement;
     clearResults();
@@ -40,7 +40,7 @@ if (form) {
         variableRate: readNumber('variableRate') / 100,
         operatingDays: readNumber('operatingDays'),
         targetProfit: readNumber('targetProfit'),
-        averageOrderValue: averageOrderValueRaw ? Number(averageOrderValueRaw) : undefined,
+        averageOrderValue: averageOrderValueRaw ? readNumber('averageOrderValue') : undefined,
       });
       clearFieldErrors();
       if (error) { error.textContent = ''; error.hidden = true; }

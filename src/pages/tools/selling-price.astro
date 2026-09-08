@@ -1,4 +1,5 @@
 ---
+import SiteHeader from '../../engine/components/SiteHeader.astro';
 import ToolKnowledgePage from '../../engine/components/ToolKnowledgePage.astro';
 import SeoHead from '../../engine/components/SeoHead.astro';
 import MoneyInput from '../../engine/components/MoneyInput.astro';
@@ -6,12 +7,29 @@ import PercentageInput from '../../engine/components/PercentageInput.astro';
 import Result from '../../engine/components/Result.astro';
 import { validateProjectDefinition } from '../../engine/validation';
 import { sellingPriceProject, sellingPriceSources, sellingPriceTool } from '../../projects/sajang/tools/selling-price/definition';
-import { calculateSellingPriceModeA, formatPercent, formatWon } from '../../projects/sajang/tools/selling-price/calculator';
+import { calculateSellingPriceModeA, calculateSellingPriceModeB, formatPercent, formatWon } from '../../projects/sajang/tools/selling-price/calculator';
 import '../../engine/styles/foundation.css';
 import '../../projects/sajang/styles/selling-price.css';
 import { resolveRelatedTools } from '../../projects/sajang/tools/registry';
 validateProjectDefinition(sellingPriceProject, (id) => id === 'selling-price' ? () => calculateSellingPriceModeA : undefined);
 const exampleResult = calculateSellingPriceModeA({ unitCost: 10_000, fixedSellingCost: 2_000, percentageFee: 0.03, targetContributionRate: 0.4 });
+const exampleModeBResult = calculateSellingPriceModeB({ sellingPrice: 21_053, unitCost: 10_000, fixedSellingCost: 2_000, percentageFee: 0.03 });
+const verifiedExamples = [
+  {
+    mode: 'a',
+    title: sellingPriceTool.knowledge.example.title,
+    inputs: Object.entries(sellingPriceTool.knowledge.example.inputs).map(([key, value]) => [sellingPriceTool.knowledge.exampleLabels?.inputs[key] ?? key, sellingPriceTool.knowledge.exampleInputDisplay?.[key] ?? String(value)]),
+    results: [['계산된 판매가격', formatWon(exampleResult.sellingPrice)]],
+    explanation: sellingPriceTool.knowledge.example.explanation,
+  },
+  {
+    mode: 'b',
+    title: '현재 판매가격에서 비용과 수수료를 빼면 얼마나 남을까요?',
+    inputs: [['지금 받고 있는 판매가격', formatWon(21_053)], ['상품 하나에 드는 비용', formatWon(10_000)], ['한 건 팔 때 별도로 드는 비용', formatWon(2_000)], ['판매 수수료 비율', formatPercent(0.03)]],
+    results: [['개당 예상 남는 금액', formatWon(exampleModeBResult.unitContribution)], ['비용을 빼고 남는 비율', formatPercent(exampleModeBResult.contributionRate)], ['판매 수수료', formatWon(exampleModeBResult.fee)]],
+    explanation: '수수료는 21,053원 × 3% = 631.59원입니다. 개당 남는 금액은 21,053원 - 10,000원 - 2,000원 - 631.59원 = 8,421.41원이며, 판매가격의 약 40%입니다. 계산 중 소수점은 유지하고 표시 금액만 원 단위로 반올림합니다.',
+  },
+];
 ---
 <!doctype html>
 <html lang="ko">
@@ -20,7 +38,7 @@ const exampleResult = calculateSellingPriceModeA({ unitCost: 10_000, fixedSellin
     <title>{sellingPriceTool.search.title}</title><meta name="description" content={sellingPriceTool.search.description} />
     <SeoHead tool={sellingPriceTool} projectName="사장도구" categoryName="가격" path="/tools/selling-price/" siteUrl={import.meta.env.PUBLIC_SITE_URL} basePath={import.meta.env.BASE_URL} />
   </head>
-  <body><main class="engine-container"><ToolKnowledgePage tool={sellingPriceTool} projectName="사장도구" categoryName="가격" sources={sellingPriceSources} relatedTools={resolveRelatedTools(sellingPriceTool)}>
+  <body><SiteHeader brand="사장도구" /><main class="engine-container engine-calculator"><ToolKnowledgePage showHeader={false} tool={sellingPriceTool} projectName="사장도구" categoryName="가격" sources={sellingPriceSources} relatedTools={resolveRelatedTools(sellingPriceTool)}>
     <section slot="calculator" class="engine-calculator" data-selling-price-tool aria-labelledby="selling-price-calculator">
       <h2 id="selling-price-calculator" class="engine-h2">계산 목적</h2>
       <div class="selling-price-mode-switch" role="radiogroup" aria-label="계산 목적">
@@ -29,13 +47,29 @@ const exampleResult = calculateSellingPriceModeA({ unitCost: 10_000, fixedSellin
       </div>
       <div class="selling-price-layout">
         <section class="selling-price-panel" data-selling-price-panel="a"><h3 class="engine-h3">얼마에 팔아야 하지?</h3>
-          <form data-selling-price-form="a"><MoneyInput id="unitCostA" label="단위 비용" required min={0} defaultValue={10000} /><MoneyInput id="fixedSellingCostA" label="고정 판매비" required min={0} defaultValue={2000} /><PercentageInput id="percentageFeeA" label="판매 수수료율" required /><PercentageInput id="targetContributionRateA" label="목표 기여율" required defaultValue={40} /><button class="engine-button" type="submit">계산하기</button><p data-calculator-error class="engine-input-error" role="alert" hidden></p><Result variant="primary" label="계산된 판매가격" value={formatWon(exampleResult.sellingPrice).replace(/원$/, '')} unit="원" id="selling-price-result" /><p>입력 비용과 목표 기여율을 기준으로 계산된 판매가격입니다.</p><p data-result="contributionRate" class="engine-numeric">기여율 기준: {formatPercent(exampleResult.contributionRate)}</p></form>
+          <form data-selling-price-form="a"><MoneyInput id="unitCostA" label="상품 하나에 드는 비용" required min={0} defaultValue={10000} /><MoneyInput id="fixedSellingCostA" label="한 건 팔 때 별도로 드는 비용" required min={0} defaultValue={2000} /><PercentageInput id="percentageFeeA" label="판매할 때 빠지는 수수료 비율" required defaultValue={3} /><PercentageInput id="targetContributionRateA" label="비용을 빼고 남기고 싶은 비율" required defaultValue={40} /><button class="engine-button" type="submit">계산하기</button><p data-calculator-error class="engine-input-error" role="alert" hidden></p><div class="selling-price-result-panel"><Result variant="primary" label="계산된 판매가격" value={formatWon(exampleResult.sellingPrice).replace(/원$/, '')} unit="원" id="selling-price-result" /><p>입력 비용과 목표 비율을 기준으로 계산된 판매가격입니다.</p></div></form>
         </section>
         <section class="selling-price-panel" data-selling-price-panel="b" hidden><h3 class="engine-h3">지금 가격에 얼마나 남지?</h3>
-          <form data-selling-price-form="b"><MoneyInput id="sellingPriceB" label="현재 판매가격" required min={0} /><MoneyInput id="unitCostB" label="단위 비용" required min={0} /><MoneyInput id="fixedSellingCostB" label="고정 판매비" required min={0} /><PercentageInput id="percentageFeeB" label="판매 수수료율" required /><button class="engine-button" type="submit">계산하기</button><p data-calculator-error class="engine-input-error" role="alert" hidden></p><Result variant="primary" label="예상 기여금" value="입력 후 계산" id="unit-contribution-result" /><p data-result="unitContribution" class="engine-numeric">입력 비용 차감 후 금액</p><p data-result="contributionRate" class="engine-numeric">기여율</p><p data-result="fee" class="engine-numeric">판매 수수료</p></form>
+          <form data-selling-price-form="b"><MoneyInput id="sellingPriceB" label="지금 받고 있는 판매가격" required min={0} defaultValue={21053} /><MoneyInput id="unitCostB" label="상품 하나에 드는 비용" required min={0} defaultValue={10000} /><MoneyInput id="fixedSellingCostB" label="한 건 팔 때 별도로 드는 비용" required min={0} defaultValue={2000} /><PercentageInput id="percentageFeeB" label="판매할 때 빠지는 수수료 비율" required defaultValue={3} /><button class="engine-button" type="submit">계산하기</button><p data-calculator-error class="engine-input-error" role="alert" hidden></p><div class="selling-price-result-panel"><Result variant="primary" label="개당 예상 남는 금액" value={formatWon(exampleModeBResult.unitContribution).replace(/원$/, '')} unit="원" id="unit-contribution-result" /><p data-result="contributionRate" class="engine-numeric">비용을 빼고 남는 비율: {formatPercent(exampleModeBResult.contributionRate)}</p><p data-result="fee" class="engine-numeric">수수료: {formatWon(exampleModeBResult.fee)}</p></div></form>
         </section>
       </div>
     </section>
+    <Fragment slot="example">
+      {verifiedExamples.map((example) => (
+        <section class="engine-section engine-example" data-selling-price-example={example.mode} hidden={example.mode !== 'a'} aria-labelledby={`verified-example-${example.mode}`}>
+          <h2 id={`verified-example-${example.mode}`} class="engine-h2">검증된 예시</h2>
+          <p>{example.title}</p>
+          <dl class="engine-example-list">
+            {example.inputs.map(([label, value]) => <div><dt>{label}</dt><dd class="engine-numeric">{value}</dd></div>)}
+          </dl>
+          <h3 class="engine-h3">결과</h3>
+          <dl class="engine-example-list engine-example-result">
+            {example.results.map(([label, value]) => <div><dt>{label}</dt><dd class="engine-numeric">{value}</dd></div>)}
+          </dl>
+          <p>{example.explanation}</p>
+        </section>
+      ))}
+    </Fragment>
   </ToolKnowledgePage></main></body>
 </html>
 <script src="../../projects/sajang/tools/selling-price/client.ts"></script>

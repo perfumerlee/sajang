@@ -22,9 +22,9 @@ export const calculateSellingPriceModeA: PureCalculator<SellingPriceModeAInput, 
   rate(input.percentageFee, 'INVALID_PERCENTAGE_FEE');
   rate(input.targetContributionRate, 'INVALID_TARGET_CONTRIBUTION_RATE');
   if (input.percentageFee + input.targetContributionRate >= 1) throw new SellingPriceInputError('COMBINED_RATE_TOO_HIGH');
-  const contributionRate = 1 - input.percentageFee - input.targetContributionRate;
-  const sellingPrice = (input.unitCost + input.fixedSellingCost) / contributionRate;
-  const result = { sellingPrice, contributionRate };
+  const remainingRate = 1 - input.percentageFee - input.targetContributionRate;
+  const sellingPrice = (input.unitCost + input.fixedSellingCost) / remainingRate;
+  const result = { sellingPrice, contributionRate: input.targetContributionRate };
   finiteResult(result);
   return result;
 };

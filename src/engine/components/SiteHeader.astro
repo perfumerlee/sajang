@@ -3,4 +3,4 @@ interface Props { brand: string; active?: string; }
 const { brand, active } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
-<header class="site-header"><div class="engine-container site-header-inner"><a class="site-brand" href={base}>{brand}</a><nav aria-label="사이트"><a class:list={{ 'site-current': active === 'tools' }} href={base}>도구</a><a class:list={{ 'site-current': active === 'about' }} href={`${base}about/`}>소개</a></nav></div></header>
+<header class="site-header"><div class="engine-container site-header-inner"><a class="site-brand" href={base}>{brand}</a><nav aria-label="사이트"><a class:list={{ 'site-current': active === 'tools' }} href={base}>전용 계산기 5종</a><a class:list={{ 'site-current': active === 'about' }} href={`${base}about/`}>소개</a></nav></div></header>

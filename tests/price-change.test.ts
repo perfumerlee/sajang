@@ -67,7 +67,7 @@ describe('price-change production calculator', () => {
     expect(priceChangeTool.knowledge.example.result.requiredQuantity).toBe('74개');
     expect(page).toContain('ToolKnowledgePage');
     expect(definition).toContain('가격 올려도 될까?');
-    expect(page).toContain('현재 총 기여금 대비 증감액');
+    expect(page).toContain('현재 총 남는 금액 대비 증감액');
     expect(client).toContain('setFiniteResult');
     expect(client).toContain('aria-describedby');
     expect(sitemap).toContain('priceChangeTool');

@@ -1,3 +1,5 @@
+@import './refined.css';
+
 .hiring-profit-layout { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); gap: var(--space-8); margin-block-start: calc(var(--space-6) - var(--space-2)); }
 .hiring-profit-input-panel, .hiring-profit-result-panel { min-width: 0; }
 .hiring-profit-result-panel { border-inline-start: 1px solid var(--color-rule); padding-inline-start: var(--space-6); }

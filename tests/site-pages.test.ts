@@ -17,7 +17,7 @@ describe('PHASE 11 site integration contracts', () => {
     expect(new Set(pages.map((page) => page.match(/<title>(.*?)<\/title>/)?.[1])).size).toBe(3);
     for (const page of pages) { expect(page).toContain('SiteSeoHead'); expect(page).toContain('SiteHeader'); expect(page).toContain('SiteFooter'); }
     expect(seo).toContain('rel="canonical"');
-    expect(pages[2]).toContain('공개 문의 이메일이나 운영 연락처가 지정되어 있지 않습니다');
+    expect(pages[2]).toContain('현재 공개된 문의 이메일이나 연락처가 없습니다');
   });
 
   it('includes all published site and tool routes in the sitemap', () => {

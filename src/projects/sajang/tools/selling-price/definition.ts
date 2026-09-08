@@ -25,6 +25,6 @@ export const sellingPriceTool: ToolDefinition = {
 
 export const sellingPriceProject: ProjectDefinition = {
   id: 'sajang', name: '사장도구', description: '장사를 하며 필요한 숫자를 계산하는 도구', locale: 'ko-KR', baseUrl: '/', owner: 'Sajang', navigation: [],
-  features: { localStorage: false, analytics: false, ads: false, remoteData: false }, theme: { id: 'working-ledger' },
+  features: { localStorage: false, analytics: true, ads: false, remoteData: false }, theme: { id: 'working-ledger' },
   categories: [{ id: 'pricing', name: '가격', question: '가격을 어떻게 정해야 하지?', description: '판매가격과 비용을 빼고 남는 금액을 계산합니다.', tools: ['selling-price'], status: 'published' }], tools: [sellingPriceTool], sources: sellingPriceSources,
 };

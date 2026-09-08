@@ -1,5 +1,6 @@
 import { calculateSellingPriceModeA, calculateSellingPriceModeB, formatPercent, formatWon, SellingPriceInputError } from './calculator';
 import { setFiniteResult, clearResultValues } from '../../../../engine/result-runtime';
+import { trackSajangEvent } from '../../analytics/provider';
 
 const root = document.querySelector<HTMLElement>('[data-selling-price-tool]');
 if (root) {
@@ -46,11 +47,13 @@ if (root) {
         if (form.dataset.sellingPriceForm === 'a') {
           const result = calculateSellingPriceModeA({ unitCost: read(form, 'unitCostA'), fixedSellingCost: read(form, 'fixedSellingCostA'), percentageFee: read(form, 'percentageFeeA') / 100, targetContributionRate: read(form, 'targetContributionRateA') / 100 });
           setFiniteResult(form.querySelector('#selling-price-result [data-result-number]')!, result.sellingPrice, (value) => formatWon(value).replace(/원$/, ''));
+          trackSajangEvent('tool_calculate', { projectId: 'sajang', categoryId: 'pricing', toolId: 'selling-price' });
         } else {
           const result = calculateSellingPriceModeB({ sellingPrice: read(form, 'sellingPriceB'), unitCost: read(form, 'unitCostB'), fixedSellingCost: read(form, 'fixedSellingCostB'), percentageFee: read(form, 'percentageFeeB') / 100 });
           setFiniteResult(form.querySelector('#unit-contribution-result [data-result-number]')!, result.unitContribution, (value) => formatWon(value).replace(/원$/, ''));
           setFiniteResult(form.querySelector('[data-result="contributionRate"]')!, result.contributionRate, (value) => `비용을 빼고 남는 비율: ${formatPercent(value)}`);
           setFiniteResult(form.querySelector('[data-result="fee"]')!, result.fee, (value) => `수수료: ${formatWon(value)}`);
+          trackSajangEvent('tool_calculate', { projectId: 'sajang', categoryId: 'pricing', toolId: 'selling-price' });
         }
       } catch (caught) {
         const code = caught instanceof SellingPriceInputError ? caught.code : 'NON_FINITE_INPUT';

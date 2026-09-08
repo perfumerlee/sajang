@@ -1,0 +1,22 @@
+---
+import { sajangGtmContainerId } from './provider';
+---
+{import.meta.env.PROD && <>
+  <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${sajangGtmContainerId}`} height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+  <script>
+    import { trackSajangEvent } from './provider';
+    const initializeSajangAnalytics = () => {
+      const tool = document.querySelector<HTMLElement>('[data-analytics-tool-id]');
+      if (!tool || tool.dataset.analyticsTracked === 'true') return;
+      tool.dataset.analyticsTracked = 'true';
+      trackSajangEvent('tool_view', { projectId: 'sajang', categoryId: tool.dataset.analyticsCategoryId, toolId: tool.dataset.analyticsToolId! });
+      document.addEventListener('click', (event) => {
+        const link = (event.target as Element).closest<HTMLAnchorElement>('[data-analytics-destination-tool-id]');
+        if (!link) return;
+        trackSajangEvent('related_tool_click', { projectId: 'sajang', categoryId: tool.dataset.analyticsCategoryId, toolId: tool.dataset.analyticsToolId!, destinationToolId: link.dataset.analyticsDestinationToolId });
+      });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeSajangAnalytics, { once: true });
+    else initializeSajangAnalytics();
+  </script>
+</>}

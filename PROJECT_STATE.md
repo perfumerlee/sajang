@@ -44,6 +44,15 @@ support the approved Tool Site Engine and Sajang specifications.
 -   PHASE 15 production code/static/accessibility/safety QA and manual viewport review completed.
 -   PHASE 16 production release audit completed; static worked-example Quick Answer semantics clarified.
 
+## Post-release Operations
+
+-   Analytics Activation v0.01: COMPLETE
+-   GTM Container: `GTM-WTHLSBXR`
+-   Analytics Provider: ACTIVE in production builds only
+-   Events: `tool_view`, `tool_calculate`, `related_tool_click`
+-   Calculator input/output analytics: DISABLED
+-   Advertising Provider: DISABLED
+
 ## In Progress
 
 -   PHASE 16 is complete. Production routes, calculators, static HTML, metadata, links, BASE_PATH, workflow, privacy, safety, and architecture release checks passed.
@@ -93,7 +102,7 @@ support the approved Tool Site Engine and Sajang specifications.
 
 ## Current Known Issues
 
--   No release blockers remain. Storage, analytics, ads, and remote user-data activation remain disabled.
+-   No release blockers remain. Storage, ads, and remote user-data activation remain disabled. Analytics is active through the Sajang GTM provider in production builds only.
 
 ## Next Task
 

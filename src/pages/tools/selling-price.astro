@@ -30,15 +30,18 @@ const verifiedExamples = [
     explanation: '수수료는 21,053원 × 3% = 631.59원입니다. 개당 남는 금액은 21,053원 - 10,000원 - 2,000원 - 631.59원 = 8,421.41원이며, 판매가격의 약 40%입니다. 계산 중 소수점은 유지하고 표시 금액만 원 단위로 반올림합니다.',
   },
 ];
+
+import SajangAnalytics from '../../projects/sajang/analytics/SajangAnalytics.astro';
+import SajangGtmHead from '../../projects/sajang/analytics/SajangGtmHead.astro';
 ---
 <!doctype html>
 <html lang="ko">
-  <head>
+  <head><SajangGtmHead />
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" />
     <title>{sellingPriceTool.search.title}</title><meta name="description" content={sellingPriceTool.search.description} />
     <SeoHead tool={sellingPriceTool} projectName="사장도구" categoryName="가격" path="/tools/selling-price/" siteUrl={import.meta.env.PUBLIC_SITE_URL} basePath={import.meta.env.BASE_URL} />
   </head>
-  <body><SiteHeader brand="사장도구" /><main class="engine-container engine-calculator"><ToolKnowledgePage showHeader={false} tool={sellingPriceTool} projectName="사장도구" categoryName="가격" sources={sellingPriceSources} relatedTools={resolveRelatedTools(sellingPriceTool)}>
+  <body><SajangAnalytics /><SiteHeader brand="사장도구" /><main class="engine-container engine-calculator"><ToolKnowledgePage showHeader={false} tool={sellingPriceTool} projectName="사장도구" categoryName="가격" sources={sellingPriceSources} relatedTools={resolveRelatedTools(sellingPriceTool)}>
     <section slot="calculator" class="engine-calculator" data-selling-price-tool aria-labelledby="selling-price-calculator">
       <h2 id="selling-price-calculator" class="engine-h2">계산 목적</h2>
       <div class="selling-price-mode-switch" role="radiogroup" aria-label="계산 목적">

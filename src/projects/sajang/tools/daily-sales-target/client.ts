@@ -1,5 +1,6 @@
 import { calculateDailySalesTarget, formatCustomers, formatPercent, formatWon, DailySalesTargetInputError } from './calculator';
 import { setFiniteResult } from '../../../../engine/result-runtime';
+import { trackSajangEvent } from '../../analytics/provider';
 
 const form = document.querySelector<HTMLFormElement>('[data-daily-sales-target-form]');
 if (form) {
@@ -53,6 +54,7 @@ if (form) {
         if (calculation.customersNeeded === undefined) resultElement('customersNeeded')!.textContent = '객단가 입력 시 계산';
         else setFiniteResult(resultElement('customersNeeded')!, calculation.customersNeeded, formatCustomers);
       }
+      trackSajangEvent('tool_calculate', { projectId: 'sajang', categoryId: 'sales', toolId: 'daily-sales-target' });
     } catch (caught) {
       clearResults();
       clearFieldErrors();

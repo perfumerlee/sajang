@@ -25,6 +25,6 @@ export const priceChangeTool: ToolDefinition = {
 
 export const priceChangeProject: ProjectDefinition = {
   id: 'sajang', name: '사장도구', description: '장사를 하며 필요한 숫자를 계산하는 도구', locale: 'ko-KR', baseUrl: '/', owner: 'Sajang', navigation: [],
-  features: { localStorage: false, analytics: false, ads: false, remoteData: false }, theme: { id: 'working-ledger' },
+  features: { localStorage: false, analytics: true, ads: false, remoteData: false }, theme: { id: 'working-ledger' },
   categories: [{ id: 'pricing', name: '가격', question: '가격을 어떻게 바꾸면 좋을까?', description: '가격 변경과 남는 금액 변화를 계산합니다.', tools: ['price-change'], status: 'published' }], tools: [priceChangeTool], sources: priceChangeSources,
 };

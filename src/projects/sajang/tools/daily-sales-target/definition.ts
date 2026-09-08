@@ -49,7 +49,7 @@ export const dailySalesTargetTool: ToolDefinition = {
 
 export const dailySalesTargetProject: ProjectDefinition = {
   id: 'sajang', name: '사장도구', description: '장사를 하며 필요한 숫자를 계산하는 도구', locale: 'ko-KR', baseUrl: '/', owner: 'Sajang', navigation: [],
-  features: { localStorage: false, analytics: false, ads: false, remoteData: false }, theme: { id: 'working-ledger' },
+  features: { localStorage: false, analytics: true, ads: false, remoteData: false }, theme: { id: 'working-ledger' },
   categories: [{ id: 'sales', name: '매출', question: '오늘 얼마 팔아야 하지?', description: '매출 기준을 계산합니다.', tools: ['daily-sales-target'], status: 'published' }],
   tools: [dailySalesTargetTool], sources: dailySalesTargetSources,
 };

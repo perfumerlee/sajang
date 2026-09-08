@@ -19,7 +19,7 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
 ---
 
 {showHeader && <SiteHeader brand={projectName} />}
-<article class="engine-knowledge-page">
+<article class="engine-knowledge-page" data-analytics-tool-id={tool.identity.id} data-analytics-category-id={tool.identity.category}>
   <nav aria-label="Breadcrumb" class="engine-breadcrumb">
     <a href={base}>{projectName}</a>
     <span aria-hidden="true">›</span>
@@ -98,7 +98,7 @@ const formatValue = (value: number | string | boolean) => typeof value === 'numb
         {tool.relations.relatedDecisions?.map((relation, index) => {
           const destination = relatedTools.find((candidate) => candidate.identity.id === relation.toolId);
           const slug = destination?.identity.slug ?? relation.toolId;
-          return <li><a href={`${base}tools/${slug}/`}><span class="engine-related-index">0{index + 1}</span><span class="engine-related-copy"><span class="engine-related-question">{relation.question}</span><span class="engine-related-tool">{destination?.search.name ?? relation.label}</span><span class="engine-related-label">{destination ? relation.label : '계산할 조건을 확인해보세요.'}</span></span><span class="engine-related-arrow" aria-hidden="true">→</span></a></li>;
+          return <li><a data-analytics-destination-tool-id={relation.toolId} href={`${base}tools/${slug}/`}><span class="engine-related-index">0{index + 1}</span><span class="engine-related-copy"><span class="engine-related-question">{relation.question}</span><span class="engine-related-tool">{destination?.search.name ?? relation.label}</span><span class="engine-related-label">{destination ? relation.label : '계산할 조건을 확인해보세요.'}</span></span><span class="engine-related-arrow" aria-hidden="true">→</span></a></li>;
         })}
       </ul>
     </section>

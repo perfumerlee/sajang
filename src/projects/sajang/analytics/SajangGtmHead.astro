@@ -1,0 +1,8 @@
+---
+import { sajangGtmContainerId } from './provider';
+---
+{import.meta.env.PROD && <script is:inline define:vars={{ containerId: sajangGtmContainerId }}>
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+  (() => { const firstScript = document.getElementsByTagName('script')[0]; const gtmScript = document.createElement('script'); gtmScript.async = true; gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${containerId}`; firstScript.parentNode?.insertBefore(gtmScript, firstScript); })();
+</script>}
